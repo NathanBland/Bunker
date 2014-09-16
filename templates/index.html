@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bunker</title>
+</head>
+<style>
+    .contact {
+        list-style: none;
+    }
+</style>
+<body>
+    <ul class="contacts-container">
+
+    </ul>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.4/handlebars.js"></script>
+    
+    <script id="contact-template" type="text/x-handlebars-template">
+        <li class="contact">
+            <h1>{{firstName}} {{lastName}}</h1>
+            {{#if avatar}}
+                <img src="{{avatar}}"></img>
+            {{/if}}
+            {{#if birthday}}
+                <h4 class="birthday"> {{birthday}}</h4>
+            {{/if}}
+            {{#each phoneNumbers}}
+                <h4 class="phone">{{type}} - {{phoneNumber}}</h4>
+            {{/each}}
+            <dl>
+            {{#each address}}
+                <dt>{{desc}}</dt>
+                    <dd>{{street}}</dd>
+                    <dd>{{city}}, {{state}}</dd>
+                    <dd>{{zip}}</dd>
+            {{/each}}
+            </dl>
+        </li>
+    </script>
+    <script src="contacts.js"></script>
+    <script src="loadContacts.js"></script>
+</body>
+</html>
