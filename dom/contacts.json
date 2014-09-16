@@ -1,4 +1,4 @@
-window.contacts = [{
+[{
     "id": 1,
     "firstName": "Nathan",
     "lastName": "Bland",
@@ -178,4 +178,4 @@ window.contacts = [{
         "state": "NE",
         "zip": 68506}],
     "avatar": "../images/contacts/default.png"}
-];
+]

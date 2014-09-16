@@ -74,7 +74,9 @@ function createContact( contact){
     
 }
 var container =  document.querySelector(".contacts-container");
-
-var contactElements = contacts.map(createContact).forEach(function(element){
-    container.appendChild(element);
-});
+function createElements(contacts){
+    var contactElements = contacts.map(createContact).forEach(function(element){
+        container.appendChild(element);
+    });
+}
+getJSON('contacts.json', createElements);
