@@ -1,8 +1,11 @@
-<li class="contact">
+<li class="contact pure-u-1-5">
+    
     <h1>{{firstName}} {{lastName}}</h1>
     {{#if avatar}}
         <img src="{{avatar}}"></img>
     {{/if}}
+    <button class="pure-button show-details">Details</button>
+    <div class="contact-details">
     {{#if birthday}}
         <h4 class="birthday"> {{birthday}}</h4>
     {{/if}}
@@ -17,4 +20,5 @@
             <dd>{{zip}}</dd>
     {{/each}}
     </dl>
+    </div>
 </li>
