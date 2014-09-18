@@ -8,3 +8,8 @@ function getJSON(path, callback){
     }
     xhr.send();
 }
+function getJSONP(path) {
+    var script = document.createElement('script');
+    script.src = path;
+    document.body.appendChild(script);
+}
