@@ -14,4 +14,4 @@ function renderContactsWithTemplate( contacts ) {
         container.innerHTML += contactHTML;
     });
 }
-var renderContacts = getJSON('contacts.json', renderContactsWithTemplate);
+var renderContacts = getJSON('/data/contacts.json', renderContactsWithTemplate);

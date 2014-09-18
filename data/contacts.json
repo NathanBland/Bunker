@@ -7,6 +7,10 @@
         "id": 1,
         "phoneNumber": 5585558555,
         "type": "Cell"
+    },{ 
+        "id": 1,
+        "phoneNumber": 7775551234,
+        "type": "Home"
     }],
     "address": [{
         "id": 1,
@@ -14,9 +18,16 @@
         "street": "3800 S. 48th Str.",
         "city": "Lincoln",
         "state": "NE",
+        "zip": 68506},
+        {
+        "id": 2,
+        "desc": "Work",
+        "street": "3800 S. 48th Str.",
+        "city": "Lincoln",
+        "state": "NE",
         "zip": 68506}],
     "avatar": "images/contacts/default.png"
-}},
+},
 {
     "id": 2,
     "firstName": "John",
@@ -166,4 +177,5 @@
         "city": "Lincoln",
         "state": "NE",
         "zip": 68506}],
-    "avatar": "images/contacts/default.png"}]
+    "avatar": "images/contacts/default.png"}
+]
