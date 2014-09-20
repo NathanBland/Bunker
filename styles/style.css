@@ -1,14 +1,20 @@
+body {
+    background-color: rgba(245, 245, 245, 1);
+}
 .pure-u-1-5 {
     width: 19%;
 }
-
 .contact {
+        background-color: white;
         list-style: none;
         box-shadow: 0px 0px 3px black;
         margin-right: .5em;
         margin-bottom: 1em;
 }
-
+.contact:hover {
+    cursor:pointer;
+    box-shadow: 0px 1px 3px black;
+}
 .contact h1 {
     text-align: center;
 }
@@ -16,6 +22,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 1em;
 }
 .show-details{
     display: block;
@@ -26,8 +33,12 @@
 }
 .contact-details {
     display: none;
+    margin-left: 1em;
 }
 .pure-button {
     background-color: #009CFF;
     color: white;
+}
+.visible {
+    display: block;
 }
