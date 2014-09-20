@@ -1,8 +1,7 @@
 Bunker
 ======
 
-A contact list built to keep your contacts 
-**[Preview!](https://preview.c9.io/nathanbland/bunker/index.html)**
+A contact list built to keep your contacts. You can **[Preview](https://bunker-c9-nathanbland.c9.io/)** it on c9.
 
 Project Description
 -------------------
