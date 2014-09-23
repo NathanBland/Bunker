@@ -31,8 +31,8 @@ Each **Address** has the following properties:
 - zip - A Number representing the postal code of the Address.
 
 *Possible* future properties:
-
 - relation - A String representing the connection to the person e.g., "Brother", "cousin".
+- email - This will happen, but got skipped the first go round.
 - socialProfiles - An Array of Profile objects representing a connection to a social profile: Facebook, Skype, etc.
 - categories - A String declaring an affiliation to a specific group of contacts e.g., "favorites", "Family"
 
@@ -40,3 +40,10 @@ Each **Address** has the following properties:
 - Export/import - upload a csv, or vCard file to import contacts, or export back out to either of those file types.
 - Multiple photos - Allow a rotation of photos per contact.
 - Smart Category - Build categories based on lookup usage, and/or relation.  
+ 
+Proposed Views
+--------------
+- contact/view
+- contact/edit
+- contact/add
+- contact/delete
