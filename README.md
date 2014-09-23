@@ -43,7 +43,7 @@ Each **Address** has the following properties:
  
 Proposed Views
 --------------
-- contact/view
-- contact/edit
-- contact/add
-- contact/delete
+- contact/view - Single contact view, full details displayed.
+- contact/edit - Single contact edit, will need an ID specified.
+- contact/add - Single contact add, will use the edit_contact template.
+- contact/delete - won't require a template, will be a service call.
