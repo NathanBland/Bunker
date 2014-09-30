@@ -225,45 +225,6 @@
         }
       ],
       "avatar": "../images/contacts/default.png"
-    },
-    {
-      "id": {
-        "__chain__": true,
-        "__wrapped__": 10
-      },
-      "firstName": "Nathan",
-      "lastName": "Bland",
-      "birthday": "08/21/1992",
-      "phoneNumbers": [
-        {
-          "phoneNumber": "7203417006"
-        }
-      ],
-      "address": [
-        {
-          "street": ""
-        }
-      ]
-    },
-    {
-      "id": {
-        "__chain__": true,
-        "__wrapped__": 11
-      },
-      "firstName": "John",
-      "lastName": "Smithy",
-      "birthday": "07/20/1995",
-      "phoneNumbers": [
-        {
-          "phoneNumber": "7203331111"
-        }
-      ],
-      "address": [
-        {
-          "street": "3803 s. 48th street."
-        }
-      ],
-      "avatar": "../images/contacts/default.png"
     }
   ]
 }

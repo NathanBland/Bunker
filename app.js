@@ -76,11 +76,11 @@ app.post('/contact/add', function(req, res, next) {
         });
     } else {
         console.log("storing contact info");
-         if (contact.id) {
+         if (contact.id != 0) {
             contact.get(contact.id).assign(contact);
         }
         else {
-            contact.id = contacts.size();
+            contact.id = contacts.size().__wrapped__;
             contacts.push(contact);
         }
         res.redirect('/');
