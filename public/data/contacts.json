@@ -1,0 +1,269 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "firstName": "Nathan",
+      "lastName": "Bland",
+      "birthday": "1992-08-21T00:00:00.00",
+      "phoneNumbers": [
+        {
+          "id": 1,
+          "phoneNumber": 5585558555,
+          "type": "Cell"
+        },
+        {
+          "id": 2,
+          "phoneNumber": 7775551234,
+          "type": "Home"
+        }
+      ],
+      "address": [
+        {
+          "id": 1,
+          "desc": "school",
+          "street": "3800 S. 48th Str.",
+          "city": "Lincoln",
+          "state": "NE",
+          "zip": 68506
+        },
+        {
+          "id": 2,
+          "desc": "Work",
+          "street": "3800 S. 48th Str.",
+          "city": "Lincoln",
+          "state": "NE",
+          "zip": 68506
+        }
+      ],
+      "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": 2,
+      "firstName": "John",
+      "lastName": "Smith",
+      "birthday": "1990-10-13T00:00:00.00",
+      "phoneNumbers": [
+        {
+          "id": 1,
+          "phoneNumber": 1112223333,
+          "type": "Home"
+        }
+      ],
+      "address": [],
+      "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": 3,
+      "firstName": "Mike",
+      "lastName": "",
+      "birthday": "",
+      "phoneNumbers": [
+        {
+          "id": 1,
+          "phoneNumber": 5554449876,
+          "type": "Work"
+        }
+      ],
+      "address": [
+        {
+          "id": 1,
+          "desc": "Home",
+          "street": "1234 Somewhere street",
+          "city": "nowhere",
+          "state": "NE",
+          "zip": 68555
+        }
+      ],
+      "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": 4,
+      "firstName": "mark",
+      "lastName": "John",
+      "birthday": "",
+      "phoneNumbers": [
+        {
+          "id": 1,
+          "phoneNumber": 3216541234,
+          "type": "Home"
+        }
+      ],
+      "address": [],
+      "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": 5,
+      "firstName": "Mario",
+      "lastName": "Plumber",
+      "birthday": "",
+      "phoneNumbers": [
+        {
+          "id": 1,
+          "phoneNumber": 5460007894,
+          "type": "Other"
+        }
+      ],
+      "address": [
+        {
+          "id": 1,
+          "desc": "office",
+          "street": "32 S. Magic str.",
+          "city": "Kansas City",
+          "state": "KS",
+          "zip": 45612
+        }
+      ],
+      "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": 6,
+      "firstName": "Malachi",
+      "lastName": "",
+      "birthday": "",
+      "phoneNumbers": [
+        {
+          "id": 1,
+          "phoneNumber": 4021112222,
+          "type": "Cell"
+        }
+      ],
+      "address": [],
+      "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": 7,
+      "firstName": "Keith",
+      "lastName": "",
+      "birthday": "",
+      "phoneNumbers": [
+        {
+          "id": 1,
+          "phoneNumber": 9998884561,
+          "type": "Cell"
+        }
+      ],
+      "address": [
+        {
+          "id": 1,
+          "desc": "Home away from Home",
+          "street": "3800 S. 48th Str.",
+          "city": "Lincoln",
+          "state": "NE",
+          "zip": 68506
+        }
+      ],
+      "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": 8,
+      "firstName": "Brad",
+      "lastName": "",
+      "birthday": "",
+      "phoneNumbers": [
+        {
+          "id": 1,
+          "phoneNumber": 1110012134,
+          "type": "Home"
+        }
+      ],
+      "address": [
+        {
+          "id": 1,
+          "desc": "Home away from Home",
+          "street": "3800 S. 48th Str.",
+          "city": "Lincoln",
+          "state": "NE",
+          "zip": 68506
+        }
+      ],
+      "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": 9,
+      "firstName": "David",
+      "lastName": "",
+      "birthday": "",
+      "phoneNumbers": [
+        {
+          "id": 1,
+          "phoneNumber": 12346541237,
+          "type": "Backup Phone"
+        }
+      ],
+      "address": [
+        {
+          "id": 1,
+          "desc": "Home away from Home",
+          "street": "3800 S. 48th Str.",
+          "city": "Lincoln",
+          "state": "NE",
+          "zip": 68506
+        }
+      ],
+      "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": 10,
+      "firstName": "Chad",
+      "lastName": "",
+      "birthday": "1993-04-03T00:00:00.00",
+      "phoneNumbers": [
+        {
+          "id": 1,
+          "phoneNumber": 3034567891,
+          "type": "Mobile"
+        }
+      ],
+      "address": [
+        {
+          "id": 1,
+          "desc": "Home away from Home",
+          "street": "3800 S. 48th Str.",
+          "city": "Lincoln",
+          "state": "NE",
+          "zip": 68506
+        }
+      ],
+      "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": {
+        "__chain__": true,
+        "__wrapped__": 10
+      },
+      "firstName": "Nathan",
+      "lastName": "Bland",
+      "birthday": "08/21/1992",
+      "phoneNumbers": [
+        {
+          "phoneNumber": "7203417006"
+        }
+      ],
+      "address": [
+        {
+          "street": ""
+        }
+      ]
+    },
+    {
+      "id": {
+        "__chain__": true,
+        "__wrapped__": 11
+      },
+      "firstName": "John",
+      "lastName": "Smithy",
+      "birthday": "07/20/1995",
+      "phoneNumbers": [
+        {
+          "phoneNumber": "7203331111"
+        }
+      ],
+      "address": [
+        {
+          "street": "3803 s. 48th street."
+        }
+      ],
+      "avatar": "../images/contacts/default.png"
+    }
+  ]
+}

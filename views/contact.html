@@ -1,0 +1,27 @@
+<article class="contacts-container pure-g">
+    <div class="pure-u-1-5 contact" style="height: 100%;">
+    {{#contact}}
+    <h1>{{firstName}} {{lastName}}</h1>
+    {{#if avatar}}
+        <img class="pure-img" src="{{avatar}}"></img>
+    {{/if}}
+    </div>
+    
+    <div class="pure-u-1-5 contact full-details">
+    {{#if birthday}}
+        <h4 class="birthday"> {{birthday}}</h4>
+    {{/if}}
+    {{#each phoneNumbers}}
+        <h4 class="phone">{{type}} - {{phoneNumber}}</h4>
+    {{/each}}
+    <dl>
+    {{#each address}}
+        <dt>{{desc}}</dt>
+            <dd>{{street}}</dd>
+            <dd>{{city}}, {{state}}</dd>
+            <dd>{{zip}}</dd>
+    {{/each}}
+    </dl>
+    </div>
+    {{/contact}}
+</article>
