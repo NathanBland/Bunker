@@ -1,0 +1,31 @@
+{
+  "name": "Bunker",
+  "version": "0.3.1",
+  "description": "A contact storage database",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.9.5",
+    "body-parser": "^1.9.0",
+    "hbs": "^2.7.0",
+    "lowdb": "^0.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NathanBland/Bunker.git"
+  },
+  "keywords": [
+    "contacts",
+    "address",
+    "book"
+  ],
+  "author": "Nathan Bland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NathanBland/Bunker/issues"
+  },
+  "homepage": "https://github.com/NathanBland/Bunker"
+}
