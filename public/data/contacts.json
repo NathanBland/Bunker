@@ -225,6 +225,23 @@
         }
       ],
       "avatar": "../images/contacts/default.png"
+    },
+    {
+      "id": 10,
+      "firstName": "Malachi",
+      "lastName": "Malachi",
+      "birthday": "07/11/1920",
+      "phoneNumbers": [
+        {
+          "phoneNumber": "4022223333"
+        }
+      ],
+      "address": [
+        {
+          "street": "123 some street"
+        }
+      ],
+      "avatar": "../images/contacts/default.png"
     }
   ]
 }

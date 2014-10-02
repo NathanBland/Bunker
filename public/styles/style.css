@@ -11,11 +11,24 @@ body {
         margin-right: .5em;
         margin-bottom: 1em;
 }
+.contact-form {
+        background-color: white;
+        list-style: none;
+        box-shadow: 0px 0px 3px black;
+        margin-right: .5em;
+        margin-bottom: 1em;
+}
 .contact:hover {
     cursor:pointer;
     box-shadow: 0px 1px 3px black;
 }
+.contact:hover > .show-details {
+    display: block;
+}
 .contact h1 {
+    text-align: center;
+}
+.contact-form h1 {
     text-align: center;
 }
 .contact img {
@@ -60,4 +73,15 @@ body {
 }
 .pure-controls2 button {
     width: 100%;
+}
+.pure-menu li a:hover{
+    background-color: #009CFF;
+    color: white;
+}
+.pure-menu li a:active{
+    background-color: #009CFF;
+    color: white;
+}
+.pure-form{
+    margin-top: 1em;
 }

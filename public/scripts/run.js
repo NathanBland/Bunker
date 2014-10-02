@@ -15,5 +15,3 @@ function addListener(element){
 }
 var buttons = grabElements('.contact');
 buttons.forEach(addListener);
-console.log('ANSWER ME');
-alert("TEH POPUPZ"); 
