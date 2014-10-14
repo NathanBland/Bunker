@@ -1,9 +1,10 @@
 var express = require('express');
 var hbs = require('hbs');
 var bodyParser = require('body-parser');
-var low = require('lowdb');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://' + (process.env.IP || 'localhost') + '/contacts');
 
-var db = low('./public/data/contacts.json');
+var Bunker = require('./models/Contact');
 
 var app = express();
 
@@ -20,15 +21,20 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', function(req, res, next) {
-    var contactData = db('contacts');
     res.render('index', {
-        title: "Bunker: All Contacts",
-        contacts: contactData.where().value()
+        title: "Welcome To Bunker"
     })
 });
 
 app.get('/contacts', function(req, res, next) {
-    res.redirect('/');
+    Bunker.find()
+    .sort({id: 1})
+    .exec(function(err, contacts) {
+        res.render('contacts', {
+        title: "Bunker - All Contacts",
+        contacts: contacts
+        });
+    });
 });
 
 
@@ -39,75 +45,88 @@ app.get('/contact/add', function(req, res, next) {
     });
 });
 
-app.post('/contact/add', function(req, res, next) {
-    var contacts = db('contacts');
-    
-    var name = req.body.name;
-    var myName = name.split(" ");
-    var phoneNumbers = [{phoneNumber: req.body.phoneNum }];
-    var addresses =  [{street: req.body.address }];
-    
-    var contact = {
-        id: (req.body.id) ? null : +req.body.id,
-        firstName: myName[0],
-        lastName: myName[myName.length-1],
-        birthday: req.body.birthday || '',
-        phoneNumbers: phoneNumbers,
-        address: addresses,
-        avatar: "../images/contacts/default.png"
-    };
-    
-    console.log(contact);
-    
-    var errors = [];
-    if (!req.body.name){
-         errors.push({
-            severity: "error",
-            message: "Name is a required property."
-        });
-    }
-    if (errors.length) {
-        console.warn("Validation failed for bookmark:", contact);
-        // Show the edit form again if we have errors.
-        res.render('add', {
-            title: "Add bookmark",
-            bookmark: contact,
-            notification: errors
-        });
-    } else {
-        console.log("storing contact info");
-         if (contact.id != 0) {
-            contact.get(contact.id).assign(contact);
-        }
-        else {
-            contact.id = contacts.size().__wrapped__;
-            contacts.push(contact);
-        }
-        res.redirect('/');
-    }
-});
+app.post('/contact/add', saveNew);
 
-app.get('/contact/:id', function(req, res, next) {
-    var contactData = db('contacts');
-    var contact = contactData.find({
-            id: parseInt(req.params.id, 10)
-        }).value();
-    
-    if (contact){
-        res.render('contact',{
-            title: "Contact - "+ contact.firstName + ' ' + contact.lastName,
-            contact: contact
-            
+function saveNew(req, res, next){
+    Bunker.findById(req.param.Id, function(err,contact){
+        if (!contact){
+          contact = new Bunker();  
+        }
+        var name = req.body.name;
+        var myName = name.split(" ");
+        if (myName.length < 2){
+            myName[1] = ""; //super hacky
+        }
+        //console.log(req.body.phoneNum);
+        var phoneNumbers = [{number: req.body.phoneNum }];
+        var addresses =  [{street: req.body.address }];
+        contact.set({
+            firstName: myName[0],
+            lastName: myName[myName.length-1],
+            birthday: req.body.birthday || '',
+            phoneNumber: phoneNumbers,
+            address: addresses,
+            avatar: "../images/contacts/default.png"
         });
-    } else {
-        res.render('contact', {
-            title: "You don't have that contact.",
-            notification: {
-                serverity: "error",
-                message: "The Person you seek, does not exist."
+    
+    
+        console.log(contact);
+    
+        contact.save(function(err) {
+            if (err) {
+                res.render('editPost', {
+                    title: "Error Saving Contact: " + contact.firstName,
+                    contact: contact,
+                    notification: {
+                        severity: "error",
+                        message: "uh, we have a problem. Sorry about this:  " + err
+                    }
+                });
+            } else {
+                res.redirect('/contacts');
+            }
+        });
+    });
+}
+
+function deletePost(res, req, next){
+    var contact = res.contact;
+    if(contact){
+        console.warn('Removing contact!', contact);
+        Bunker.remove(bookmark, function(err) {
+            if (err) {
+                res.render('bookmark_edit', {
+                    title: "Delete bookmark failed!",
+                    notification: {
+                        severity: "error",
+                        message: "Could not delete bookmark: " + err
+                    }
+                });
+            } else {
+                res.redirect('/');
             }
         });
     }
+}
+
+
+app.get('/contact/:id', function(req, res, next) {
+   Bunker.findById(req.params.id, function(err, contact) {
+       if (contact){
+           res.render('contact', {
+               title: contact.firstName+" "+contact.lastName+" - Bunker",
+               contact: contact
+           });
+       } else {
+           res.status(404).render('contact', {
+               title: "This person does not exist, yet.",
+               notification: {
+                   serverity: "error",
+                   message: "The contact that you seek seems to be a ninja. We coulnd't find them."
+               }
+           });
+       }
+   });
 });
 
 

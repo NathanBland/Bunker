@@ -13,3 +13,9 @@ function getJSONP(path) {
     script.src = path;
     document.body.appendChild(script);
 }
+function grabElements(elementClass){
+    //turned the node list into an array for you. Now array methods will work for you. map(), forEach(), ... etc
+    var items = [].slice.call(document.querySelectorAll(elementClass));
+    console.log(items);
+    return items;
+}
