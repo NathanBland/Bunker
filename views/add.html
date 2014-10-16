@@ -11,24 +11,24 @@
         <input type="hidden" name="id" value="{{contact.id}}">
         <div class="pure-control-group">
             <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="First &amp; Last" required>
+            <input id="name" value="{{#if contact}}{{contact.firstName}} {{contact.lastName}}{{/if}}" name="name" type="text" placeholder="First &amp; Last" required>
         </div>
 
         <div class="pure-control-group">
             <label for="birthday">Birthday</label>
-            <input id="birthday" name="birthday" type="date" placeholder="MM/DD/YYYY">
+            <input id="birthday" value="{{contact.birthday}}" name="birthday" type="date" placeholder="MM/DD/YYYY">
         </div>
 
         <div class="pure-control-group">
             <label for="phoneNum">Phone</label>
             <input id="phoneNum" name="phoneNum" type="text" placeholder="Phone Number">
-            <button type="button" class="pure-button">Add Another</button>    
+            <button type="button" value="" class="pure-button">Add Another</button>    
         </div>
         
         <div class="pure-control-group">
             <label for="address">Address</label>
-            <input id="address" name="address" type="text" placeholder="Address">
-            <button type="button" class="pure-button">Add Another</button>    
+            <input id="address" value="" name="address" type="text" placeholder="Address">
+            <button type="button"  class="pure-button">Add Another</button>    
         </div>
         
         <div class="pure-controls2">

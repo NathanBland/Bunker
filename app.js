@@ -44,14 +44,36 @@ app.get('/contact/add', function(req, res, next) {
         title: "Add A Contact"
     });
 });
+app.get('/contact/:id/edit', function(req, res, next) {
+    Bunker.findById(req.params.id, function(err, contact) {
+        console.log(contact);
+        if (contact){
+            res.render('add', {
+                title: "Edit Contact - "+contact.firstName+" "+contact.lastName,
+                contact: contact
+            });
+        } else {
+            res.render('add', {
+                title: "Add New Contact"
+            })
+        }
+    });
+    
+});
 
 app.post('/contact/add', saveNew);
+app.post('/contact/:id/edit', saveNew);
+app.post('/contact/:id/delete', deleteContact);
 
 function saveNew(req, res, next){
-    Bunker.findById(req.param.Id, function(err,contact){
+    
+    Bunker.findById(req.params.id, function(err,contact){
+        console.log(contact);
         if (!contact){
-          contact = new Bunker();  
+          contact = new Bunker();
+          console.log("Not an existing Contact.");
         }
+        
         var name = req.body.name;
         var myName = name.split(" ");
         if (myName.length < 2){
@@ -89,26 +111,26 @@ function saveNew(req, res, next){
     });
 }
 
-function deletePost(res, req, next){
-    var contact = res.contact;
-    if(contact){
-        console.warn('Removing contact!', contact);
-        Bunker.remove(bookmark, function(err) {
-            if (err) {
-                res.render('bookmark_edit', {
-                    title: "Delete bookmark failed!",
-                    notification: {
-                        severity: "error",
-                        message: "Could not delete bookmark: " + err
-                    }
-                });
-            } else {
-                res.redirect('/');
-            }
-        });
-    }
+function deleteContact(req, res, next){
+    Bunker.findById(req.params.id, function(err,contact){
+        if(contact){
+            console.warn('Removing contact!', contact);
+            Bunker.remove(contact, function(err) {
+                if (err) {
+                    res.render('add', {
+                        title: "Delete contact failed!",
+                        notification: {
+                            severity: "error",
+                            message: "Could not delete contact: " + err
+                        }
+                    });
+                } else {
+                    res.redirect('/contacts');
+                }
+            });
+        }
+    });
 }
-
 
 app.get('/contact/:id', function(req, res, next) {
    Bunker.findById(req.params.id, function(err, contact) {

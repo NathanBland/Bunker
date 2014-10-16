@@ -10,6 +10,7 @@ body {
         box-shadow: 0px 0px 3px black;
         margin-right: .5em;
         margin-bottom: 1em;
+        padding-bottom: 1em;
 }
 .contact-form {
         background-color: white;
@@ -47,10 +48,7 @@ body {
 .contact-details {
     display: none;
     margin-left: 1em;
-}
-.pure-button {
-    background-color: #009CFF;
-    color: white;
+    margin-bottom: 1em;
 }
 .visible {
     display: block;
@@ -84,4 +82,51 @@ body {
 }
 .pure-form{
     margin-top: 1em;
+}
+.landing {
+    display: block;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:1em;
+    position: relative;
+    text-align: center;
+    padding: 0.5em 1em 1em 1em;
+}
+.contact-full {
+    margin: 1em;
+    background-color: white;
+    list-style: none;
+    box-shadow: 0px 0px 3px black;
+    padding: 1em;
+}
+.contact-full img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+}
+.contact-full h1 {
+    text-align: center;
+}
+
+.button-success {
+    background: rgb(28, 184, 65); /* this is a green */
+}
+
+.button-error {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.button-warning {
+    background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.button-secondary {
+    background: rgb(66, 184, 221); /* this is a light blue */
+}
+.edit {
+    float: left;
+    margin-right: 1em;
+}
 }
