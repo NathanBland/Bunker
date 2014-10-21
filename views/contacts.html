@@ -2,15 +2,16 @@
 <p class="message {{severity}}">{{message}}</p>
 {{/notification}}
 
-<ul class="contacts-container pure-g">
+<main class="contacts-container pure-g">
     {{#contacts}}
-    <li class="contact pure-u-1-5" tabindex="0">
+    <section class="contact pure-u-1 pure-u-sm-1-2 pure-u-md-1-5 pure-u-lg-1-10" tabindex="0">
         
         <h1>{{firstName}} {{lastName}}</h1>
         {{#if avatar}}
             <img class="pure-img" src="{{avatar}}">
         {{/if}}
         <div class="contact-details">
+        <!--<h3>{{firstName}} {{lastName}}</h3>-->
         {{#if birthday}}
             <h4 class="birthday"> {{birthday}}</h4>
         {{/if}}
@@ -27,7 +28,7 @@
         </dl>
         <a href="/contact/{{id}}"><button class="pure-button pure-button-primary">Full View</button></a>
         </div>
-    </li>
+    </section>
     {{/contacts}}
-</ul>
+</main>
 <script src="/scripts/dates.js"></script>

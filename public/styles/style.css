@@ -1,35 +1,44 @@
 body {
     background-color: rgba(245, 245, 245, 1);
 }
-.pure-u-1-5 {
+.contacts-container {
+    width: 98%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+/*.pure-u-md-1-5 {
     width: 19%;
-}
+}*/
 .contact {
-        background-color: white;
-        list-style: none;
-        box-shadow: 0px 0px 3px black;
-        margin-right: .5em;
-        margin-bottom: 1em;
-        padding-bottom: 1em;
+    display: inline-block;
+    
+    list-style: none;
+    /*box-shadow: 0px 0px 3px black;
+    background-color: white;
+    margin-right: .5em;/**/
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    position: relative;
 }
-.contact-form {
-        background-color: white;
-        list-style: none;
-        box-shadow: 0px 0px 3px black;
-        margin-right: .5em;
-        margin-bottom: 1em;
-}
+
 .contact:hover {
     cursor:pointer;
     box-shadow: 0px 1px 3px black;
 }
-.contact:hover > .show-details {
-    display: block;
+.contact:hover > .contact-details {
+    display: inline-block;
+    visibility:visible;
+    position: absolute;
+    top: 0;
+    width: 100%;/**/
+    height: 100%;
+    text-align: center;
+    color: white;
+    background-color: rgba(17, 17, 17, 0.75);
+    transition:visibility 1s, background-color 0.5s;
 }
 .contact h1 {
-    text-align: center;
-}
-.contact-form h1 {
     text-align: center;
 }
 .contact img {
@@ -46,9 +55,10 @@ body {
     margin-right: auto;
 }
 .contact-details {
-    display: none;
-    margin-left: 1em;
-    margin-bottom: 1em;
+    visibility:hidden;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    
 }
 .visible {
     display: block;
@@ -56,21 +66,86 @@ body {
 .full-details {
     padding-left: 1em;
 }
+.contact-form {
+        background-color: white;
+        list-style: none;
+        box-shadow: 0px 0px 3px black;
+        margin-right: .5em;
+        margin-bottom: 1em;
+}
+.contact-form h1 {
+    text-align: center;
+}
 .add {
-    width: 50%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     
 }
-.pure-control-group{
-    width: 100%;
-    margin-left: 7em;
+@media (max-width: 700px) { 
+    .add {
+        width: 100%;
+    }
+    .add > * {
+        padding-left: 1em;
+    }
+    .add h1 {
+        padding-left: 0em;
+    }
+    .add .pure-button-primary {
+        margin-left: -0.5em !important;
+    }
+    
+}
+@media (min-width: 480px) {
+    
+    .phoneType {
+        margin-top: .5em;
+        margin-left: 11.25em;
+    }
+    .state {
+        margin-left: 11.25em;
+    }
+    .add-address{
+        margin-top: 0.5em;
+        margin-left: 11.25em;
+    }
+    .add-phone {
+        margin-top: 0.5em;
+        margin-left: 11.25em;
+    }
+}
+@media (min-width: 700px) {
+    .phoneType {
+        margin-top: 0em;
+        margin-left: 0em;
+    }
+    .state {
+        
+        margin-left: 11.25em;
+    }
+}
+@media (min-width: 980px) { 
+    .add {
+        width: 64em;
+    }
+    .city {
+        width: 15%;
+    }
+    .state {
+        margin-left: 11.25em;
+        width: 15%;
+    }
 }
 .pure-controls2 {
     margin: 1.5em 1em 0px 1em;
 }
 .pure-controls2 button {
     width: 100%;
+}
+.menu {
+    box-shadow: 0px 0px 3px black;
+    margin-bottom: 1em;
 }
 .pure-menu li a:hover{
     background-color: #009CFF;
@@ -112,6 +187,7 @@ body {
 
 .button-success {
     background: rgb(28, 184, 65); /* this is a green */
+    color: white;
 }
 
 .button-error {
@@ -129,4 +205,15 @@ body {
     float: left;
     margin-right: 1em;
 }
+.city {
+}
+.state {
+    display: block !important;
+    margin-top: 0.5em;
+}
+.small {
+    width: 15%;
+}
+.birthday {
+    padding-top: 2.5em;
 }
