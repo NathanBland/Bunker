@@ -80,12 +80,21 @@ function saveNew(req, res, next){
             myName[1] = ""; //super hacky
         }
         //console.log(req.body.phoneNum);
-        var phoneNumbers = [{number: req.body.phoneNum }];
-        var addresses =  [{street: req.body.address }];
+        var emails = [{emailAdd: req.body.email, eType: req.body.emailType }];
+        console.log(emails);
+        var phoneNumbers = [{number: req.body.phoneNum, pType: req.body.phoneType }];
+        var addresses =  [{
+            desc: req.body.desc || '',
+            street: req.body.address || '',
+            city: req.body.city || '',
+            state: req.body.state || '',
+            zip: req.body.zip || ''
+        }];
         contact.set({
             firstName: myName[0],
             lastName: myName[myName.length-1],
             birthday: req.body.birthday || '',
+            email: emails,
             phoneNumber: phoneNumbers,
             address: addresses,
             avatar: "../images/contacts/default.png"

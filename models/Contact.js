@@ -12,11 +12,16 @@ var addressSchema = new mongoose.Schema({
    state: String,
    zip: Number
 });
+var emailSchema = new mongoose.Schema({
+    emailAdd: String,
+    eType: String
+})
 
 var contactSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
     birthday: String,
+    email: [emailSchema],
     phoneNumber: [phoneNumberSchema],
     address: [addressSchema],
     avatar: String

@@ -33,7 +33,7 @@ body {
     top: 0;
     width: 100%;/**/
     height: 100%;
-    text-align: center;
+    /*text-align: center;/**/
     color: white;
     background-color: rgba(17, 17, 17, 0.75);
     transition:visibility 1s, background-color 0.5s;
@@ -95,6 +95,9 @@ body {
     .add .pure-button-primary {
         margin-left: -0.5em !important;
     }
+    .zip {
+        margin-top: 0.5em;
+    }
     
 }
 @media (min-width: 480px) {
@@ -103,7 +106,15 @@ body {
         margin-top: .5em;
         margin-left: 11.25em;
     }
+    .emailType {
+        margin-top: .5em;
+        margin-left: 11.25em;
+    }
     .state {
+        margin-left: 11.25em;
+    }
+    .zip {
+        margin-top: .5em;
         margin-left: 11.25em;
     }
     .add-address{
@@ -114,14 +125,24 @@ body {
         margin-top: 0.5em;
         margin-left: 11.25em;
     }
+    .add-email {
+        margin-top: 0.5em;
+        margin-left: 11.25em;
+    }
 }
 @media (min-width: 700px) {
     .phoneType {
         margin-top: 0em;
         margin-left: 0em;
     }
+    .emailType {
+        margin-top: 0em;
+        margin-left: 0em;
+    }
     .state {
-        
+        margin-left: 11.25em;
+    }
+    .zip {
         margin-left: 11.25em;
     }
 }
@@ -133,6 +154,10 @@ body {
         width: 15%;
     }
     .state {
+        margin-left: 11.25em;
+        width: 15%;
+    }
+    .zip {
         margin-left: 11.25em;
         width: 15%;
     }
@@ -211,9 +236,14 @@ body {
     display: block !important;
     margin-top: 0.5em;
 }
+.zip {
+    display: block !important;
+    margin-top: 0.5em;
+}
 .small {
     width: 15%;
 }
-.birthday {
+.detail-container {
     padding-top: 2.5em;
+    margin-left: 4em;
 }

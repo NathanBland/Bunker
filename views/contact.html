@@ -12,8 +12,11 @@
         {{#if birthday}}
             <h4 class="birthday"> {{birthday}}</h4>
         {{/if}}
+        {{#each email}}
+            <h4 class="email">{{#if eType}} {{eType}} -{{/if}} {{emailAdd}}</h4>
+        {{/each}}
         {{#each phoneNumber}}
-            <h4 class="phone">{{#if type}}{{type}} -{{/if}} {{number}}</h4>
+            <h4 class="phone">{{#if pType}}{{pType}} -{{/if}} {{number}}</h4>
         {{/each}}
         <dl>
         {{#each address}}

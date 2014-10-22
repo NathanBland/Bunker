@@ -11,21 +11,25 @@
             <img class="pure-img" src="{{avatar}}">
         {{/if}}
         <div class="contact-details">
-        <!--<h3>{{firstName}} {{lastName}}</h3>-->
-        {{#if birthday}}
-            <h4 class="birthday"> {{birthday}}</h4>
-        {{/if}}
-        {{#each phoneNumber}}
-            <h4 class="phone">{{#if type}} {{type}} -{{/if}} {{number}}</h4>
-        {{/each}}
-        <dl>
-        {{#each address}}
-            <dt>{{desc}}</dt>
-                <dd>{{street}}</dd>
-                <dd>{{#if city}}{{city}},{{/if}} {{state}}</dd>
-                <dd>{{zip}}</dd>
-        {{/each}}
-        </dl>
+            <div class="detail-container">
+                {{#if birthday}}
+                    <p class="birthday"> {{birthday}}</p>
+                {{/if}}
+                {{#each email}}
+                    {{#if emailAdd}}<p class="email">{{#if eType}} {{eType}} -{{/if}} {{emailAdd}}</p>{{/if}}
+                {{/each}}
+                {{#each phoneNumber}}
+                    {{#if number}}<p class="phone">{{#if pType}} {{pType}} -{{/if}} {{number}}</p>{{/if}}
+                {{/each}}
+                <dl class="addresses">
+                {{#each address}}
+                    <dt>{{desc}}</dt>
+                        <dd>{{street}}</dd>
+                        <dd>{{#if city}}{{city}},{{/if}} {{state}}</dd>
+                        <dd>{{zip}}</dd>
+                {{/each}}
+                </dl>
+            </div>
         <a href="/contact/{{id}}"><button class="pure-button pure-button-primary">Full View</button></a>
         </div>
     </section>

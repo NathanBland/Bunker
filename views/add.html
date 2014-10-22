@@ -18,33 +18,53 @@
             <label for="birthday">Birthday</label>
             <input class="birthday-input" value="{{contact.birthday}}" name="birthday" type="date" placeholder="MM/DD/YYYY">
         </div>
-
-        <div class="pure-control-group">
-            <label for="phoneNum">Phone</label>
-            <input class="phoneNum" name="phoneNum" type="text" placeholder="Phone Number">
-                <select id="type" name="phoneType" class="phoneType">
-                    <option>Mobile</option>
-                    <option>Work</option>
-                    <option>Home</option>
-                    <option>Other</option>
-                </select>
-            <button type="button" value="" class="pure-button button-success">Add Another</button>    
+        <section id="email-group">
+            <div class="pure-control-group">
+                <label for="emailAdd">Email</label>
+                <input class="emailAdd" name="email" type="text" placeholder="E-mail Address">
+                    <select id="eType" name="emailType" class="emailType">
+                        <option>Home</option>
+                        <option>Work</option>
+                        <option>Other</option>
+                    </select>
+                <button type="button" value="" class="pure-button button-success clone">Add Another</button>    
+            </div>
+        </section>
+        <section id="phone-group">
+            <div class="pure-control-group">
+                <label for="phoneNum">Phone</label>
+                <input class="phoneNum" name="phoneNum" type="text" placeholder="Phone Number">
+                    <select id="pType" name="phoneType" class="phoneType">
+                        <option>Mobile</option>
+                        <option>Work</option>
+                        <option>Home</option>
+                        <option>Other</option>
+                    </select>
+                <button type="button" value="" class="pure-button button-success clone">Add Another</button>    
+            </div>
+        </section>
+        <div id="address-group">
+            <div class="pure-control-group">
+                <label for="address">Address</label>
+                <input class="address" value="" name="address" type="text" placeholder="Address">
+                
+            </div>
+            <div class="pure-control-group">
+                <label for="desc">Description</label>
+                <input class="desc" value="" name="desc" type="text" placeholder="Description">
+            </div>
+            <div class="pure-control-group">
+                <label for="city">City, State, Zip</label>
+                <input class="city" value="" name="city" type="text" placeholder="City">
+                <input class="state" value="" name="state" type="text" placeholder="State">
+                <input class="zip" value="" name="zip" type="text" placeholder="Zip Code">
+                <!--<button type="button" class="pure-button button-success add-address">Add Another</button>-->
+            </div>
         </div>
-        
-        <div class="pure-control-group">
-            <label for="address">Address</label>
-            <input class="address" value="" name="address" type="text" placeholder="Address">
-            
-        </div>
-        <div class="pure-control-group">
-            <label for="city">City, State</label>
-            <input class="city" value="" name="city" type="text" placeholder="City">
-            <input class="state" value="" name="state" type="text" placeholder="State">
-            <button type="button" class="pure-button button-success add-address">Add Another</button>    
-        </div>
-        
         <div class="pure-controls2">
             <button type="submit" class="pure-button pure-button-primary">Submit</button>
         </div>
     </fieldset>
 </form>
+
+<script type="text/javascript" src="/scripts/form.js"></script>
