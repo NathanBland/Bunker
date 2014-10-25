@@ -5,7 +5,6 @@
 
 
 <form class="pure-form pure-form-aligned" action=""  method="POST">
-    
     <fieldset class="contact-form add" style="margin-left: auto;margin-right: auto;">
         <h1>Add A Contact</h1>
         <input type="hidden" name="id" value="{{contact.id}}">
@@ -19,16 +18,23 @@
             <input class="birthday-input" value="{{contact.birthday}}" name="birthday" type="date" placeholder="MM/DD/YYYY">
         </div>
         <section id="email-group">
-            <div class="pure-control-group">
-                <label for="emailAdd">Email</label>
-                <input class="emailAdd" name="email" type="text" placeholder="E-mail Address">
-                    <select id="eType" name="emailType" class="emailType">
-                        <option>Home</option>
-                        <option>Work</option>
-                        <option>Other</option>
-                    </select>
-                <button type="button" value="" class="pure-button button-success clone">Add Another</button>    
-            </div>
+            {{#if contact.email}}
+                {{#each contact.email}}
+                    {{> email-group.html this}}
+                {{/each}}
+                
+            {{else}}
+                <div class="pure-control-group">
+                    <label for="emailAdd">Email</label>
+                    <input class="emailAdd" name="email" type="text" placeholder="E-mail Address">
+                        <select id="eType" name="emailType" class="emailType">
+                            <option>Home</option>
+                            <option>Work</option>
+                            <option>Other</option>
+                        </select>
+                    <button type="button" value="" class="pure-button button-success clone">Add Another</button>    
+                </div>
+            {{/if}}
         </section>
         <section id="phone-group">
             <div class="pure-control-group">

@@ -37,6 +37,8 @@ body {
     color: white;
     background-color: rgba(17, 17, 17, 0.75);
     transition:visibility 1s, background-color 0.5s;
+    /*overflow-x:hidden;
+    overflow-y: hidden;/**/
 }
 .contact h1 {
     text-align: center;
