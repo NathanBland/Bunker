@@ -1,13 +1,17 @@
 var express = require('express');
 var hbs = require('hbs');
+var hbsutils = require('hbs-utils')(hbs);
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
+var routes = require('./routes/');
+
 mongoose.connect('mongodb://' + (process.env.IP || 'localhost') + '/contacts');
 
-var Bunker = require('./models/Contact');
-
 var app = express();
-hbs.registerPartials('./views/partials');
+hbsutils.registerPartials('./views/partials');
+hbsutils.registerWatchedPartials('views/partials');
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
 
@@ -19,14 +23,17 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(cookieParser('important things, kept safe.'));
+app.use(session({
+    secret: 'The key to a secret is hidden in the chest.',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(routes.setup(app));
 
-
-
-require('./routes.js')(app, Bunker);
-
-var server = app.listen(app.get('port'), app.get('ip'), function(){
-   var address = server.address();
-   console.log("Get this party started!");
-   console.log("Contacts app running on https://%s:%s",
+var server = app.listen(app.get('port'), app.get('ip'), function() {
+    var address = server.address();
+    console.log("Get this party started!");
+    console.log("Contacts app running on https://%s:%s",
         address.address, address.port);
 });

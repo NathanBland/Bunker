@@ -1,0 +1,13 @@
+{{#each contact.phoneNumber }}
+    <div class="pure-control-group">
+        <label for="phoneNum">Phone</label>
+        <input class="phoneNum" name="phoneNum" type="text" value="{{number}}" placeholder="Phone Number">
+            <select id="pType" name="phoneType" class="phoneType" value="{{pType}}">
+                <option>Mobile</option>
+                <option>Work</option>
+                <option>Home</option>
+                <option>Other</option>
+            </select>
+        <button type="button" value="" class="pure-button button-success clone">Add Another</button>    
+    </div>
+{{/each}}

@@ -21,16 +21,17 @@
                 {{#each phoneNumber}}
                     {{#if number}}<p class="phone">{{#if pType}} {{pType}} -{{/if}} {{number}}</p>{{/if}}
                 {{/each}}
-                <dl class="addresses">
+                <!--<dl class="addresses">
                 {{#each address}}
                     <dt>{{desc}}</dt>
                         <dd>{{street}}</dd>
                         <dd>{{#if city}}{{city}},{{/if}} {{state}}</dd>
                         <dd>{{zip}}</dd>
                 {{/each}}
-                </dl>
+                </dl>-->
+                
             </div>
-        <a href="/contact/{{id}}"><button class="pure-button pure-button-primary">Full View</button></a>
+            <a href="/contact/{{id}}" style="text-decoration: none;"><button class="pure-button pure-button-primary full">Full View</button></a>
         </div>
     </section>
     {{/contacts}}

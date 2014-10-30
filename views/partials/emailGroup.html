@@ -1,3 +1,4 @@
+{{#each contact.email}}
 <div class="pure-control-group">
     <label for="emailAdd">Email</label>
     <input class="emailAdd" name="email" type="text" value="{{emailAdd}}" placeholder="E-mail Address">
@@ -8,3 +9,4 @@
         </select>
     <button type="button" value="" class="pure-button button-success clone">Add Another</button>    
 </div>
+{{/each}}

@@ -1,7 +1,4 @@
-{{#notification}}
-<!-- Something happened: -->
-<p class="message {{severity}}">{{message}}</p>
-{{/notification}}
+ {{> notifications}}
 
 
 <form class="pure-form pure-form-aligned" action=""  method="POST">
@@ -19,9 +16,8 @@
         </div>
         <section id="email-group">
             {{#if contact.email}}
-                {{#each contact.email}}
-                    {{> email-group.html this}}
-                {{/each}}
+                
+                    {{> emailGroup}}
                 
             {{else}}
                 <div class="pure-control-group">
@@ -37,6 +33,9 @@
             {{/if}}
         </section>
         <section id="phone-group">
+            {{# if contact.phoneNumber}}
+                {{> phoneGroup}}
+            {{else}}
             <div class="pure-control-group">
                 <label for="phoneNum">Phone</label>
                 <input class="phoneNum" name="phoneNum" type="text" placeholder="Phone Number">
@@ -48,7 +47,11 @@
                     </select>
                 <button type="button" value="" class="pure-button button-success clone">Add Another</button>    
             </div>
+            {{/if}}
         </section>
+        {{#if contact.address}}
+            {{> addressGroup}}
+        {{else}}
         <div id="address-group">
             <div class="pure-control-group">
                 <label for="address">Address</label>
@@ -67,6 +70,7 @@
                 <!--<button type="button" class="pure-button button-success add-address">Add Another</button>-->
             </div>
         </div>
+        {{/if}}
         <div class="pure-controls2">
             <button type="submit" class="pure-button pure-button-primary">Submit</button>
         </div>

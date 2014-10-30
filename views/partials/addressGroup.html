@@ -1,0 +1,20 @@
+{{#each contact.address}}
+    <div id="address-group">
+        <div class="pure-control-group">
+            <label for="address">Address</label>
+            <input class="address" value="{{street}}" name="address" type="text" placeholder="Address">
+            
+        </div>
+        <div class="pure-control-group">
+            <label for="desc">Description</label>
+            <input class="desc" value="{{desc}}" name="desc" type="text" placeholder="Description">
+        </div>
+        <div class="pure-control-group">
+            <label for="city">City, State, Zip</label>
+            <input class="city" value="{{city}}" name="city" type="text" placeholder="City">
+            <input class="state" value="{{state}}" name="state" type="text" placeholder="State">
+            <input class="zip" value="{{zip}}" name="zip" type="text" placeholder="Zip Code">
+            <!--<button type="button" class="pure-button button-success add-address">Add Another</button>-->
+        </div>
+    </div>
+{{/each}}

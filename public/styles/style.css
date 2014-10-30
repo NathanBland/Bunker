@@ -84,6 +84,11 @@ body {
     margin-right: auto;
     
 }
+.full {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 @media (max-width: 700px) { 
     .add {
         width: 100%;
@@ -187,7 +192,7 @@ body {
 }
 .landing {
     display: block;
-    width: 25%;
+    width: 30%;
     margin-left: auto;
     margin-right: auto;
     margin-top:1em;
@@ -248,4 +253,7 @@ body {
 .detail-container {
     padding-top: 2.5em;
     margin-left: 4em;
+}
+.landing .message {
+    font-size: 200%;
 }

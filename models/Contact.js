@@ -24,7 +24,13 @@ var contactSchema = new mongoose.Schema({
     email: [emailSchema],
     phoneNumber: [phoneNumberSchema],
     address: [addressSchema],
-    avatar: String
+    avatar: String,
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        index: true
+    }
 });
 
 var Contact = mongoose.model('contact', contactSchema);

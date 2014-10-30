@@ -1,31 +1,45 @@
-module.exports = function(app, Bunker){
-    //Below should be pushed out to its own view file.
-    app.get('/', function(req, res, next) {
+var express = require("express");
+var ensureLogin = require('connect-ensure-login');
+var ensureAuthenticated = ensureLogin.ensureAuthenticated;
+
+exports.setup = function(){
+    var router = express.Router();
+    
+    router.get('/', function(req, res, next) {
         res.render('index', {
             title: "Welcome To Bunker"
-        })
-    });
-    
-    app.get('/contacts', function(req, res, next) {
-        Bunker.find()
-        .sort({id: 1})
-        .exec(function(err, contacts) {
-            res.render('contacts', {
-            title: "Bunker - All Contacts",
-            contacts: contacts
-            });
         });
+    });
+    router.all('/contacts/*', ensureAuthenticated('/login'));
+    
+    router.get('/contacts', function(req, res, next) {
+        if (req.user){
+            req.user.getContacts()
+            .sort({id: 1})
+            .exec(function(err, contacts){
+                    res.render('contacts', {
+                    title: "Bunker - All Contacts",
+                    contacts: contacts    
+                });
+            });
+        }
     });
     
     
     //attempt to make additions
-    app.get('/contact/add', function(req, res, next) {
+    router.get('/contact/add', function(req, res, next) {
+        if (!req.user){
+            return res.status(401).send("Not authorized.");
+        }
         res.render('add', {
             title: "Add A Contact"
         });
     });
-    app.get('/contact/:id/edit', function(req, res, next) {
-        Bunker.findById(req.params.id, function(err, contact) {
+    router.get('/contact/:id/edit', function(req, res, next) {
+        if (!req.user){
+            return res.status(401).send("Not authorized.");
+        }    
+        req.user.getContactById(req.params.id, function(err, contact) {
             console.log(contact);
             if (contact){
                 res.render('add', {
@@ -35,22 +49,23 @@ module.exports = function(app, Bunker){
             } else {
                 res.render('add', {
                     title: "Add New Contact"
-                })
+                });
             }
         });
-        
     });
     
-    app.post('/contact/add', saveNew);
-    app.post('/contact/:id/edit', saveNew);
-    app.post('/contact/:id/delete', deleteContact);
+    router.post('/contact/add', saveNew);
+    router.post('/contact/:id/edit', saveNew);
+    router.post('/contact/:id/delete', deleteContact);
     
     function saveNew(req, res, next){
-        
-        Bunker.findById(req.params.id, function(err,contact){
+        if (!req.user){
+            return res.status(401).send("Not authorized.");
+        }    
+        req.user.getContactById(req.params.id, function(err, contact) {
             console.log(contact);
             if (!contact){
-              contact = new Bunker();
+              contact =  req.user.newContact();
               console.log("Not an existing Contact.");
             }
             
@@ -60,9 +75,9 @@ module.exports = function(app, Bunker){
                 myName[1] = ""; //super hacky
             }
             var cEmails = req.body.email;
-            
+            var emails = [];
             if (cEmails.indexOf(',') > -1){
-                var emails = [];
+                
                 var eCount = req.body.email.length;
                 if (eCount > 0) {
                     for (var i=0; i<eCount; i++){
@@ -73,15 +88,13 @@ module.exports = function(app, Bunker){
                     }
                 }
             } else {
-                var emails = [{emailAdd:cEmails,eType:req.body.emailType}];
+                emails = [{emailAdd:cEmails,eType:req.body.emailType}];
             }
             
             var cPhones = req.body.phoneNum;
-            
+            var phoneNumbers = [];
             if (cPhones.indexOf(',') > -1){
-                var phoneNumbers = [];
                 var pCount = req.body.phoneNum.length;
-                
                 if (pCount > 0) {
                     for (var i=0; i<eCount; i++){
                         phoneNumbers.push({
@@ -91,7 +104,7 @@ module.exports = function(app, Bunker){
                     }
                 }
             } else {
-                var phoneNumbers = [{
+                phoneNumbers = [{
                     number: req.body.phoneNum,
                     pType: req.body.phoneType
                 }];
@@ -135,10 +148,13 @@ module.exports = function(app, Bunker){
     }
     
     function deleteContact(req, res, next){
-        Bunker.findById(req.params.id, function(err,contact){
+        if (!req.user){
+            return res.status(401).send("Not authorized.");
+        }    
+        req.user.getContactById(req.params.id, function(err, contact) {
             if(contact){
                 console.warn('Removing contact!', contact);
-                Bunker.remove(contact, function(err) {
+                req.user.removeContact(contact, function(err) {
                     if (err) {
                         res.render('add', {
                             title: "Delete contact failed!",
@@ -155,8 +171,11 @@ module.exports = function(app, Bunker){
         });
     }
     
-    app.get('/contact/:id', function(req, res, next) {
-       Bunker.findById(req.params.id, function(err, contact) {
+    router.get('/contact/:id', function(req, res, next) {
+       if (!req.user){
+            return res.status(401).send("Not authorized.");
+        }    
+        req.user.getContactById(req.params.id, function(err, contact) {
            if (contact){
                res.render('contact', {
                    title: contact.firstName+" "+contact.lastName+" - Bunker",
@@ -176,9 +195,10 @@ module.exports = function(app, Bunker){
     
     
     //dat 404
-    app.use(function(req, res) {
+    router.use(function(req, res) {
         console.warn('404 Not Found: %s', req.originalUrl);
-        res.status(404).render('index', {
+        res.status(404).render('404', {
+            title: "404 Error - Page Not Found",
             notification: {
                 severity: "error",
                 message: "Hey I couldn't find that page, sorry."
@@ -187,14 +207,17 @@ module.exports = function(app, Bunker){
     });
     
     // server errors
-    app.use(function(err, req, res, next){
+    router.use(function(err, req, res, next){
         console.log(err.stack);
         
-        res.status(500).render('index', {
-           notification: {
+        res.status(500).render('500', {
+            title: "500 Error - Server Error",
+            notification: {
                severity: "error",
-               message: "Something is very wrong on our side.\n Try again later."
+               message: "Something is very wrong on our side. Try again later."
            } 
         });
     });
-}
+    
+    return router;
+};
