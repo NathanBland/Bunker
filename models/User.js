@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Contact = require('./Contact');
+
 var User = mongoose.Schema({
     username: {
         type: String,
