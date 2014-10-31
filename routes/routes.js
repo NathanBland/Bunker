@@ -24,15 +24,30 @@ exports.setup = function(){
             });
         }
     });
-    
+    router.get('/about', function(req, res, next){
+        if (!req.user){
+            return res.redirect('/login');
+        }
+        res.render('about.html', {
+            title: "Bunker - About Bunker"
+        });
+    });
+    router.get('/search', function(req, res, next){
+        if (!req.user){
+            return res.redirect('/login');
+        }
+        res.render('search.html', {
+            title: "Bunker - Search for Contacts"
+        });
+    });
     
     //attempt to make additions
     router.get('/contact/add', function(req, res, next) {
         if (!req.user){
-            return res.status(401).send("Not authorized.");
+            return res.redirect('/login');
         }
         res.render('add', {
-            title: "Add A Contact"
+            title: "Bunker - Add A Contact"
         });
     });
     router.get('/contact/:id/edit', function(req, res, next) {
