@@ -1,6 +1,9 @@
 body {
     background-color: rgba(245, 245, 245, 1);
 }
+nav .fa {
+    padding-right: .5em;
+}
 .contacts-container {
     width: 98%;
     display: block;
@@ -23,7 +26,7 @@ body {
 }
 
 .contact:hover {
-    cursor:pointer;
+    /*cursor:pointer;*/
     box-shadow: 0px 1px 3px black;
 }
 .contact:hover > .contact-details {
@@ -89,86 +92,6 @@ body {
     margin-right: auto;
     display: block;
 }
-@media (max-width: 700px) { 
-    .add {
-        width: 100%;
-    }
-    .add > * {
-        padding-left: 1em;
-    }
-    .add h1 {
-        padding-left: 0em;
-    }
-    .add .pure-button-primary {
-        margin-left: -0.5em !important;
-    }
-    .zip {
-        margin-top: 0.5em;
-    }
-    
-}
-@media (min-width: 480px) {
-    
-    .phoneType {
-        margin-top: .5em;
-        margin-left: 11.25em;
-    }
-    .emailType {
-        margin-top: .5em;
-        margin-left: 11.25em;
-    }
-    .state {
-        margin-left: 11.25em;
-    }
-    .zip {
-        margin-top: .5em;
-        margin-left: 11.25em;
-    }
-    .add-address{
-        margin-top: 0.5em;
-        margin-left: 11.25em;
-    }
-    .add-phone {
-        margin-top: 0.5em;
-        margin-left: 11.25em;
-    }
-    .add-email {
-        margin-top: 0.5em;
-        margin-left: 11.25em;
-    }
-}
-@media (min-width: 700px) {
-    .phoneType {
-        margin-top: 0em;
-        margin-left: 0em;
-    }
-    .emailType {
-        margin-top: 0em;
-        margin-left: 0em;
-    }
-    .state {
-        margin-left: 11.25em;
-    }
-    .zip {
-        margin-left: 11.25em;
-    }
-}
-@media (min-width: 980px) { 
-    .add {
-        width: 64em;
-    }
-    .city {
-        width: 15%;
-    }
-    .state {
-        margin-left: 11.25em;
-        width: 15%;
-    }
-    .zip {
-        margin-left: 11.25em;
-        width: 15%;
-    }
-}
 .pure-controls2 {
     margin: 1.5em 1em 0px 1em;
 }
@@ -192,13 +115,18 @@ body {
 }
 .landing {
     display: block;
-    width: 30%;
     margin-left: auto;
     margin-right: auto;
     margin-top:1em;
     position: relative;
     text-align: center;
     padding: 0.5em 1em 1em 1em;
+}
+.landing fieldset {
+    padding-top: 1em;
+}
+.landing .pure-control-group {
+    margin-right: 0.5em;
 }
 .contact-full {
     margin: 1em;
@@ -256,4 +184,103 @@ body {
 }
 .landing .message {
     font-size: 200%;
+}
+.noContacts {
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+
+@media (max-width: 700px) { 
+    .add {
+        width: 100%;
+    }
+    .add > * {
+        padding-left: 1em;
+    }
+    .add h1 {
+        padding-left: 0em;
+    }
+    .add .pure-button-primary {
+        margin-left: -0.5em !important;
+    }
+    .zip {
+        margin-top: 0.5em;
+    }
+    .landing .pure-form-aligned .pure-control-group {
+        margin-left: 1em;
+        margin-top: 1em;
+    }
+    
+}
+@media (min-width: 480px) {
+    
+    .phoneType {
+        margin-top: .5em;
+        margin-left: 11.25em;
+    }
+    .emailType {
+        margin-top: .5em;
+        margin-left: 11.25em;
+    }
+    .state {
+        margin-left: 11.25em;
+    }
+    .zip {
+        margin-top: .5em;
+        margin-left: 11.25em;
+    }
+    .add-address{
+        margin-top: 0.5em;
+        margin-left: 11.25em;
+    }
+    .add-phone {
+        margin-top: 0.5em;
+        margin-left: 11.25em;
+    }
+    .add-email {
+        margin-top: 0.5em;
+        margin-left: 11.25em;
+    }
+    .landing {
+        width: 90%;
+    }
+}
+@media (min-width: 700px) {
+    .phoneType {
+        margin-top: 0em;
+        margin-left: 0em;
+    }
+    .emailType {
+        margin-top: 0em;
+        margin-left: 0em;
+    }
+    .state {
+        margin-left: 11.25em;
+    }
+    .zip {
+        margin-left: 11.25em;
+    }
+    .landing {
+        width: 50%;
+    }
+}
+@media (min-width: 980px) { 
+    .add {
+        width: 64em;
+    }
+    .city {
+        width: 15%;
+    }
+    .state {
+        margin-left: 11.25em;
+        width: 15%;
+    }
+    .zip {
+        margin-left: 11.25em;
+        width: 15%;
+    }
+    .landing {
+        width: 30%;
+    }
 }

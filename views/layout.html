@@ -5,6 +5,8 @@
     <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/styles/pure-min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
     <script type="text/javascript" src="/scripts/util.js"></script>
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="/styles/grids-responsive-old-ie-min.css">
@@ -18,10 +20,18 @@
 <body>
 <nav class="pure-menu pure-menu-open pure-menu-horizontal menu">
     <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/contacts/">View All</a></li>
-        <li><a href="/contact/add">Add Contact</a></li>
-        <li><a href="/about">About</a></li>
+        {{#if user}}
+        <li><a href="/contacts"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="/contacts/"><i class="fa fa-book"></i>  View All</a></li>
+        <li><a href="/contact/add"><i class="fa fa-plus"></i>  Add Contact</a></li>
+        <li><a href="/about"><i class="fa fa-info-circle"></i>  About</a></li>
+        <li><a href="/logout"><i class="fa fa-sign-out"></i>  Sign out</a></li>
+        {{else}}
+        <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="/login"><i class="fa fa-sign-in"></i>  Login</a></li>
+        <li><a href="/signup"><i class="fa fa-pencil"></i>  Sign Up</a></li>
+        <li><a href="/about"><i class="fa fa-info-circle"></i>  About</a></li>
+        {{/if}}
     </ul>
 </nav>
 

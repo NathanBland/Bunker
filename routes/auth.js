@@ -4,6 +4,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/User.js');
 exports.setup = function(app) {
     var router = express.Router();
+    
     passport.use(new LocalStrategy(User.authenticate()));
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
@@ -40,8 +41,9 @@ exports.setup = function(app) {
         console.log("signing up:" + req.body.username);
         User.register(new User({
             username: req.body.username,
-            password:req.body.password
-        }),  function(err, user) {
+            
+        }),req.body.password,   function(err, user) {
+            console.log(req.body.password);
             if (err) {
                 console.log(err);
                 return res.render('signup', {
@@ -68,12 +70,17 @@ exports.setup = function(app) {
     });
     
     router.post('/login', function(req, res, next) {
-        
+        /*passport.authenticate('local'), function(req, res) {
+            res.redirect('/');
+        }/**/
+
         passport.authenticate('local', function(err, user, info) {
             if (err) {
                 return next(err);
             }
             if (!user) {
+                console.log(err);
+                console.log(user);
                 return res.render('login', {
                     title: "Bunker - Log in",
                     notification: {
@@ -89,7 +96,7 @@ exports.setup = function(app) {
                 }
                 return res.redirect('/contacts');
             });
-        })(req, res, next);
+        })(req, res, next);/**/
     });
     // Log the user out and redirect to the homepage.
     router.get('/logout', function(req, res) {

@@ -3,6 +3,12 @@
 {{/notification}}
 
 <main class="contacts-container pure-g">
+    {{#unless contacts}}
+    <div class="noContacts">
+        <h1 class="pure-u-1">Nothing to show <i class="fa fa-frown-o"></i></h1>
+        <p class="pure-u-1">Try adding some contacts!</p>
+    </div>
+    {{/unless}}
     {{#contacts}}
     <section class="contact pure-u-1 pure-u-sm-1-2 pure-u-md-1-5 pure-u-lg-1-10" tabindex="0">
         
