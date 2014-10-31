@@ -43,7 +43,6 @@ exports.setup = function(app) {
             username: req.body.username,
             
         }),req.body.password,   function(err, user) {
-            console.log(req.body.password);
             if (err) {
                 console.log(err);
                 return res.render('signup', {
