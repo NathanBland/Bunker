@@ -1,17 +1,24 @@
 var mongoose = require('mongoose');
 var Contact = require('./Contact');
+var findOrCreate = require('mongoose-findorcreate')
 
 var User = mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        required: false,
         index: {
             unique: true
         }
-    }
+    },
+    twitter: {
+        id: String,
+        token: String,
+        displayName: String,
+        username: String
+    },
 });
 User.plugin(require('passport-local-mongoose'));
-
+User.plugin(findOrCreate);
 User.methods.getContacts = function(callback) {
     return Contact.find({
         user_id: this._id
