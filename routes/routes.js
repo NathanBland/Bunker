@@ -31,14 +31,26 @@ exports.setup = function() {
             title: "Bunker - About Bunker"
         });
     });
+    
+    //search
+    router.get('/results?', function(req,res,next){
+        var re = new RegExp("^"+req.query.name, 'i');
+        req.user.getContacts()
+            .or([{ firstName: re }, { lastName: re }])
+            .sort({firstName: 1}).exec(function(err, contacts) {
+                //res.json(JSON.stringify(users)); possible future ajax 
+                res.render('contacts', {
+                    title: "Bunker - Search Results",
+                    contacts: contacts
+                });
+            });    
+    });
     router.get('/search', function(req, res, next) {
-        if (!req.user) {
-            return res.redirect('/login');
-        }
         res.render('search.html', {
             title: "Bunker - Search for Contacts"
         });
     });
+    
 
     //attempt to make additions
     router.get('/contact/add', function(req, res, next) {
