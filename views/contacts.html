@@ -18,15 +18,20 @@
         {{/if}}
         <div class="contact-details">
             <div class="detail-container">
+                
                 {{#if birthday}}
                     <p class="birthday"> {{birthday}}</p>
                 {{/if}}
-                {{#each email}}
-                    {{#if emailAdd}}<p class="email">{{#if eType}} {{eType}} -{{/if}} {{emailAdd}}</p>{{/if}}
-                {{/each}}
-                {{#each phoneNumber}}
-                    {{#if number}}<p class="phone">{{#if pType}} {{pType}} -{{/if}} {{number}}</p>{{/if}}
-                {{/each}}
+                <div class="email">
+                    {{#each email}}
+                        {{#if emailAdd}}<p class="">{{#if eType}} {{eType}} -{{/if}} {{emailAdd}}</p>{{/if}}
+                    {{/each}}
+                </div>
+                <div class="phone">
+                    {{#each phoneNumber}}
+                        {{#if number}}<p class="">{{#if pType}} {{pType}} -{{/if}} {{number}}</p>{{/if}}
+                    {{/each}}
+                </div>
                 <!--<dl class="addresses">
                 {{#each address}}
                     <dt>{{desc}}</dt>

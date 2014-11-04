@@ -69,11 +69,9 @@ exports.setup = function(app) {
     });
     
     router.post('/login', function(req, res, next) {
-        /*passport.authenticate('local'), function(req, res) {
-            res.redirect('/');
-        }/**/
-
+        console.log(req.body.username);
         passport.authenticate('local', function(err, user, info) {
+            console.log("AUTH ME");
             if (err) {
                 return next(err);
             }
@@ -90,6 +88,7 @@ exports.setup = function(app) {
             }
             // Log the user in and redirect to the homepage.
             req.login(user, function(err) {
+                console.log("LOG ME IN");
                 if (err) {
                     return next(err);
                 }

@@ -71,6 +71,10 @@ nav .fa {
 .full-details {
     padding-left: 1em;
 }
+.full-details dt {
+    padding-top:0.5em;
+    font-weight: bold;
+}
 .contact-form {
         background-color: white;
         list-style: none;
@@ -129,11 +133,9 @@ nav .fa {
     margin-right: 0.5em;
 }
 .contact-full {
-    margin: 1em;
-    background-color: white;
+    /*background-color: white;/**/
     list-style: none;
-    box-shadow: 0px 0px 3px black;
-    padding: 1em;
+    /*box-shadow: 0px 0px 3px black;/**/
 }
 .contact-full img {
     display: block;
@@ -141,8 +143,8 @@ nav .fa {
     margin-right: auto;
     margin-bottom: 1em;
 }
-.contact-full h1 {
-    text-align: center;
+.contact-full .full-name {
+    text-align: center;/**/
 }
 
 .button-success {
@@ -180,7 +182,19 @@ nav .fa {
 }
 .detail-container {
     padding-top: 2.5em;
-    margin-left: 4em;
+    margin-left: 2em;
+}
+.email p {
+    display:none
+}
+.email p:first-child {
+    display: block;
+}
+.phone p {
+    display:none
+}
+.phone p:first-child {
+    display: block;
 }
 .landing .message {
     font-size: 200%;
@@ -211,7 +225,15 @@ nav .fa {
         margin-left: 1em;
         margin-top: 1em;
     }
-    
+    .pure-menu.pure-menu-horizontal > .pure-menu-heading {
+        display:block;
+    }
+    .pure-menu-horizontal .pure-menu-heading {
+        display:block;
+    }
+    .pure-menu-horizontal li {
+        display:block;
+    }
 }
 @media (min-width: 480px) {
     
@@ -245,6 +267,15 @@ nav .fa {
     .landing {
         width: 90%;
     }
+    .pure-menu.pure-menu-horizontal > .pure-menu-heading {
+        display:block;
+    }
+    .pure-menu-horizontal .pure-menu-heading {
+        display:block;
+    }
+    .pure-menu-horizontal li {
+        display:block;
+    }
 }
 @media (min-width: 700px) {
     .phoneType {
@@ -263,6 +294,15 @@ nav .fa {
     }
     .landing {
         width: 50%;
+    }
+    .pure-menu.pure-menu-horizontal > .pure-menu-heading {
+        display:inline-block;
+    }
+    .pure-menu-horizontal .pure-menu-heading {
+        display:inline-block;
+    }
+    .pure-menu-horizontal li {
+        display:inline-block;
     }
 }
 @media (min-width: 980px) { 

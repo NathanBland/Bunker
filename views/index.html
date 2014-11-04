@@ -1,23 +1,45 @@
  {{> notifications}}
 <div class="landing">
-    <h1>Sign up for Bunker!</h1>
-    <form class="pure-form pure-form-aligned" action="/signup"  method="POST">
-        <fieldset class="contact-form" style="margin-left: auto;margin-right: auto;">
-            <div class="pure-control-group">
-                <label for="username">E-mail</label>
-                <input class="username" name="username" type="text" placeholder="E-mail Address" required>
-            </div>
-             <div class="pure-control-group">
-                <label for="password">Password</label>
-                <input id="password" name="password" type="password" placeholder="Password">
-            </div>
-            <div class="pure-control-group">
-                <label for="password2">Repeat Password</label>
-                <input id="password2" name="password2" type="password" placeholder="Password (again)">
-            </div>
-            <div class="pure-controls2">
-                <button type="submit" class="pure-button pure-button-primary">Sign Up!</button>
-            </div>
-        </fieldset>
-    </form>
+    {{# unless user}}
+        <h1>Sign up for Bunker!</h1>
+        <form class="pure-form pure-form-aligned" action="/signup"  method="POST">
+            <fieldset class="" style="margin-left: auto;margin-right: auto;">
+                <div class="pure-control-group">
+                    <label for="username">E-mail</label>
+                    <input class="username" name="username" type="text" placeholder="E-mail Address" required>
+                </div>
+                 <div class="pure-control-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Password">
+                </div>
+                <div class="pure-control-group">
+                    <label for="password2">Repeat Password</label>
+                    <input id="password2" name="password2" type="password" placeholder="Password (again)">
+                </div>
+                <div class="pure-controls2">
+                    <button type="submit" class="pure-button button-success">Sign Up!</button>
+                </div>
+            </fieldset>
+        </form>
+        <h3>Or Login Below</h3>
+        <form class="pure-form pure-form-aligned" action="/login"  method="POST">
+            <fieldset class="" style="margin-left: auto;margin-right: auto;">
+                <div class="pure-control-group">
+                    <label for="username">E-mail</label>
+                    <input class="username" name="username" type="text" placeholder="E-mail Address" required>
+                </div>
+                 <div class="pure-control-group">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Password">
+                </div>
+                <div class="pure-controls2">
+                    <button type="submit" class="pure-button pure-button-primary">Login</button>
+                </div>
+            </fieldset>
+        </form>
+    {{/unless}}
+    {{#if user}}
+    <h1>Welcome to Bunker</h1>
+    <p>This page is nice and all, but why don't you head over to your <a href="/contacts/">contacts</a>?</p>
+    {{/if}}
 </div>

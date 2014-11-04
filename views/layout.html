@@ -19,15 +19,14 @@
 </head>
 <body>
 <nav class="pure-menu pure-menu-open pure-menu-horizontal menu">
+    <a href="/" class="pure-menu-heading">Bunker</a>
     <ul>
         {{#if user}}
-        <li><a href="/contacts"><i class="fa fa-home"></i> Home</a></li>
         <li><a href="/contacts/"><i class="fa fa-book"></i>  View All</a></li>
         <li><a href="/contact/add"><i class="fa fa-plus"></i>  Add Contact</a></li>
         <li><a href="/about"><i class="fa fa-info-circle"></i>  About</a></li>
         <li><a href="/logout"><i class="fa fa-sign-out"></i>  Sign out</a></li>
         {{else}}
-        <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
         <li><a href="/login"><i class="fa fa-sign-in"></i>  Login</a></li>
         <li><a href="/signup"><i class="fa fa-pencil"></i>  Sign Up</a></li>
         <li><a href="/about"><i class="fa fa-info-circle"></i>  About</a></li>
