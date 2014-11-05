@@ -13,9 +13,9 @@ nav .fa {
 /*.pure-u-md-1-5 {
     width: 19%;
 }*/
+
 .contact {
     display: inline-block;
-    
     list-style: none;
     /*box-shadow: 0px 0px 3px black;
     background-color: white;
@@ -24,22 +24,22 @@ nav .fa {
     padding-bottom: 1em;
     position: relative;
 }
-
 .contact:hover {
     /*cursor:pointer;*/
     box-shadow: 0px 1px 3px black;
 }
 .contact:hover > .contact-details {
     display: inline-block;
-    visibility:visible;
+    visibility: visible;
     position: absolute;
     top: 0;
-    width: 100%;/**/
+    width: 100%;
+    /**/
     height: 100%;
     /*text-align: center;/**/
     color: white;
     background-color: rgba(17, 17, 17, 0.75);
-    transition:visibility 1s, background-color 0.5s;
+    transition: visibility 1s, background-color 0.5s;
     /*overflow-x:hidden;
     overflow-y: hidden;/**/
 }
@@ -52,18 +52,17 @@ nav .fa {
     margin-right: auto;
     margin-bottom: 1em;
 }
-.show-details{
+.show-details {
     display: block;
-    margin-bottom:1em;
-    margin-top:1em;
+    margin-bottom: 1em;
+    margin-top: 1em;
     margin-left: auto;
     margin-right: auto;
 }
 .contact-details {
-    visibility:hidden;
+    visibility: hidden;
     height: 0;
     background-color: rgba(0, 0, 0, 0.25);
-    
 }
 .visible {
     display: block;
@@ -72,15 +71,15 @@ nav .fa {
     padding-left: 1em;
 }
 .full-details dt {
-    padding-top:0.5em;
+    padding-top: 0.5em;
     font-weight: bold;
 }
 .contact-form {
-        background-color: white;
-        list-style: none;
-        box-shadow: 0px 0px 3px black;
-        margin-right: .5em;
-        margin-bottom: 1em;
+    background-color: white;
+    list-style: none;
+    box-shadow: 0px 0px 3px black;
+    margin-right: .5em;
+    margin-bottom: 1em;
 }
 .contact-form h1 {
     text-align: center;
@@ -89,7 +88,6 @@ nav .fa {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    
 }
 .full {
     margin-left: auto;
@@ -106,22 +104,22 @@ nav .fa {
     box-shadow: 0px 0px 3px black;
     margin-bottom: 1em;
 }
-.pure-menu li a:hover{
+.pure-menu li a:hover {
     background-color: #009CFF;
     color: white;
 }
-.pure-menu li a:active{
+.pure-menu li a:active {
     background-color: #009CFF;
     color: white;
 }
-.pure-form{
+.pure-form {
     margin-top: 1em;
 }
 .landing {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top:1em;
+    margin-top: 1em;
     position: relative;
     text-align: center;
     padding: 0.5em 1em 1em 1em;
@@ -144,32 +142,31 @@ nav .fa {
     margin-bottom: 1em;
 }
 .contact-full .full-name {
-    text-align: center;/**/
+    text-align: center;
+    /**/
 }
-
 .button-success {
-    background: rgb(28, 184, 65); /* this is a green */
+    background: rgb(28, 184, 65);
+    /* this is a green */
     color: white;
 }
-
 .button-error {
-    background: rgb(202, 60, 60); /* this is a maroon */
+    background: rgb(202, 60, 60);
+    /* this is a maroon */
 }
-
 .button-warning {
-    background: rgb(223, 117, 20); /* this is an orange */
+    background: rgb(223, 117, 20);
+    /* this is an orange */
 }
-
 .button-secondary {
-    background: rgb(66, 184, 221); /* this is a light blue */
+    background: rgb(66, 184, 221);
+    /* this is a light blue */
 }
 .edit {
     float: left;
     margin-right: 1em;
 }
-.city {
-}
-.state {
+.city {} .state {
     display: block !important;
     margin-top: 0.5em;
 }
@@ -185,13 +182,13 @@ nav .fa {
     margin-left: 2em;
 }
 .email p {
-    display:none
+    display: none
 }
 .email p:first-child {
     display: block;
 }
 .phone p {
-    display:none
+    display: none
 }
 .phone p:first-child {
     display: block;
@@ -202,10 +199,9 @@ nav .fa {
 .noContacts {
     margin-left: auto;
     margin-right: auto;
-    text-align:center;
+    text-align: center;
 }
-
-@media (max-width: 700px) { 
+@media (max-width: 700px) {
     .add {
         width: 100%;
     }
@@ -226,17 +222,16 @@ nav .fa {
         margin-top: 1em;
     }
     .pure-menu.pure-menu-horizontal > .pure-menu-heading {
-        display:block;
+        display: block;
     }
     .pure-menu-horizontal .pure-menu-heading {
-        display:block;
+        display: block;
     }
     .pure-menu-horizontal li {
-        display:block;
+        display: block;
     }
 }
 @media (min-width: 480px) {
-    
     .phoneType {
         margin-top: .5em;
         margin-left: 11.25em;
@@ -252,7 +247,7 @@ nav .fa {
         margin-top: .5em;
         margin-left: 11.25em;
     }
-    .add-address{
+    .add-address {
         margin-top: 0.5em;
         margin-left: 11.25em;
     }
@@ -268,13 +263,13 @@ nav .fa {
         width: 90%;
     }
     .pure-menu.pure-menu-horizontal > .pure-menu-heading {
-        display:block;
+        display: block;
     }
     .pure-menu-horizontal .pure-menu-heading {
-        display:block;
+        display: block;
     }
     .pure-menu-horizontal li {
-        display:block;
+        display: block;
     }
 }
 @media (min-width: 700px) {
@@ -296,16 +291,16 @@ nav .fa {
         width: 50%;
     }
     .pure-menu.pure-menu-horizontal > .pure-menu-heading {
-        display:inline-block;
+        display: inline-block;
     }
     .pure-menu-horizontal .pure-menu-heading {
-        display:inline-block;
+        display: inline-block;
     }
     .pure-menu-horizontal li {
-        display:inline-block;
+        display: inline-block;
     }
 }
-@media (min-width: 980px) { 
+@media (min-width: 980px) {
     .add {
         width: 64em;
     }
@@ -327,6 +322,12 @@ nav .fa {
 .fa-twitter {
     color: #2290BF;
 }
+.fa-google {
+    color: #DD4B39;
+}
+.fa-facebook {
+    color: #3B5998;
+}
 .landing section {
-   text-align: left;
+    text-align: left;
 }
