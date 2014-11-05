@@ -14,6 +14,8 @@
     "mongoose": "^3.8.17",
     "mongoose-findorcreate": "^0.1.2",
     "passport": "^0.2.1",
+    "passport-google": "^0.3.0",
+    "passport-google-oauth": "^0.1.5",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^1.0.0",
     "passport-twitter": "^1.0.2"

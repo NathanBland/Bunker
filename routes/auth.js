@@ -2,11 +2,70 @@ var express = require("express");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
-var User = require('../models/User.js');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
+var User = require('../models/User.js');
 exports.setup = function(app) {
     var router = express.Router();
-
+    
+    
+    //#################
+    //Google
+    //#################
+     passport.use(new GoogleStrategy({
+     
+             clientID: '409698655576-ov114v5qsto2kgogobrfsr63usoit96r.apps.googleusercontent.com',
+             clientSecret: 'Hz54DyqPUVdYERls1rThv-qa',
+             callbackURL: 'http://bunker-c9-nathanbland.c9.io/login/google/callback',
+     
+         },
+         function(token, refreshToken, profile, done) {
+     
+             // make the code asynchronous
+             // User.findOne won't fire until we have all our data back from Google
+             process.nextTick(function() {
+     
+                 // try to find the user based on their google id
+                 User.findOne({
+                     'google.id': profile.id
+                 }, function(err, user) {
+                     if (err)
+                         return done(err);
+     
+                     if (user) {
+     
+                         // if a user is found, log them in
+                         return done(null, user);
+                     }
+                     else {
+                         // if the user isnt in our database, create a new user
+                         var newUser = new User();
+     
+                         // set all of the relevant information
+                         newUser.google.id = profile.id;
+                         newUser.google.token = token;
+                         newUser.google.name = profile.displayName;
+                         newUser.google.email = profile.emails[0].value; // pull the first email
+     
+                         // save the user
+                         newUser.save(function(err) {
+                             if (err){
+                                console.log(err);
+                                throw(err);
+                             }
+                              
+                             return done(null, newUser);
+                         });
+                     }
+                 });
+             });
+     
+         }));
+    //#################
+    //End Google
+    //#################
+    
+    
     //#################
     //twitter
     //#################
@@ -49,7 +108,6 @@ exports.setup = function(app) {
     //#################
     //endtwitter
     //#################
-
     passport.use(new LocalStrategy(User.authenticate()));
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
@@ -61,10 +119,8 @@ exports.setup = function(app) {
             done(err, user);
         });
     });
-
     router.use(passport.initialize());
     router.use(passport.session());
-
     router.use(function(req, res, next) {
         var user = req.user;
         if (user) {
@@ -74,13 +130,11 @@ exports.setup = function(app) {
         }
         next();
     });
-
     router.get('/signup', function(req, res) {
         res.render('signup', {
             title: "Bunker - Create an account"
         });
     });
-
     router.post('/signup', function(req, res) {
         if (req.body.password != req.body.password2) {
             return res.render('signup', {
@@ -94,7 +148,6 @@ exports.setup = function(app) {
         console.log("signing up:" + req.body.username);
         User.register(new User({
             username: req.body.username,
-
         }), req.body.password, function(err, user) {
             if (err) {
                 console.log(err);
@@ -113,7 +166,6 @@ exports.setup = function(app) {
             });
         });
     });
-
     //#################
     //twitter
     //#################
@@ -123,16 +175,30 @@ exports.setup = function(app) {
             successRedirect: '/contacts',
             failureRedirect: '/login'
         }));
-
+    //#################
     //endtwitter
+    //#################
+    
+    //#################
+    //Google
+    //#################
+    router.get('/login/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
+    // the callback after google has authenticated the user
+    router.get('/login/google/callback',
+        passport.authenticate('google', {
+            successRedirect: '/contacts',
+            failureRedirect: '/login'
+        }));
+    //#################
+    //End Google
+    //#################
     router.get('/login', function(req, res) {
         res.render('login', {
             title: "Bunker - Log in",
             user: req.user
         });
     });
-
     router.post('/login', function(req, res, next) {
         console.log(req.body.username);
         passport.authenticate('local', function(err, user, info) {
@@ -166,6 +232,5 @@ exports.setup = function(app) {
         req.logout();
         res.redirect('/');
     });
-
     return router;
 };
