@@ -1,13 +1,12 @@
 {{#each contact.address}}
     <div id="address-group">
         <div class="pure-control-group">
-            <label for="address">Address</label>
-            <input class="address" value="{{street}}" name="address" type="text" placeholder="Address">
-            
+            <label for="desc">Address Type</label>
+            <input class="desc" value="{{desc}}" name="desc" type="text" placeholder="Description">
         </div>
         <div class="pure-control-group">
-            <label for="desc">Description</label>
-            <input class="desc" value="{{desc}}" name="desc" type="text" placeholder="Description">
+            <label for="address">Address</label>
+            <input class="address" value="{{street}}" name="address" type="text" placeholder="Address">
         </div>
         <div class="pure-control-group">
             <label for="city">City, State, Zip</label>

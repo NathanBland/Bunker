@@ -8,122 +8,99 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../models/User.js');
 exports.setup = function(app) {
     var router = express.Router();
-    
-    
+
+
     //#################
     //facebook
     //#################
     passport.use(new FacebookStrategy({
+            clientID: '781472265257885',
+            clientSecret: 'da62b44583a8420f7ece0ded89d1154b',
+            callbackURL: 'http://bunker-c9-nathanbland.c9.io/login/facebook/callback'
 
-        // pull in our app id and secret from our auth.js file
-        clientID        : '781472265257885',
-        clientSecret    : 'da62b44583a8420f7ece0ded89d1154b',
-        callbackURL     : 'http://bunker-c9-nathanbland.c9.io/login/facebook/callback'
+        },
+        function(token, refreshToken, profile, done) {
 
-    },
+            process.nextTick(function() {
 
-    // facebook will send back the token and profile
-    function(token, refreshToken, profile, done) {
+                User.findOne({
+                    'facebook.id': profile.id
+                }, function(err, user) {
 
-        // asynchronous
-        process.nextTick(function() {
+                    if (err)
+                        return done(err);
+                    if (user) {
+                        return done(null, user); 
+                    }
+                    else {
+                        var newUser = new User();
+                        newUser.facebook.id = profile.id; 
+                        newUser.facebook.token = token; 
+                        newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                        newUser.facebook.email = profile.emails[0].value;
 
-            // find the user in the database based on their facebook id
-            User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
-
-                // if there is an error, stop everything and return that
-                // ie an error connecting to the database
-                if (err)
-                    return done(err);
-
-                // if the user is found, then log them in
-                if (user) {
-                    return done(null, user); // user found, return that user
-                } else {
-                    // if there is no user found with that facebook id, create them
-                    var newUser            = new User();
-
-                    // set all of the facebook information in our user model
-                    newUser.facebook.id    = profile.id; // set the users facebook id                   
-                    newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
-                    newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
-                    newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-
-                    // save our user to the database
-                    newUser.save(function(err) {
-                        if (err)
-                            throw err;
-
-                        // if successful, return the new user
-                        return done(null, newUser);
-                    });
-                }
-
+                        newUser.save(function(err) {
+                            if (err)
+                                throw err;
+                            return done(null, newUser);
+                        });
+                    }
+                });
             });
-        });
 
-    }));
+        }));
     //#################
     //End facebook
     //#################
-    
+
     //#################
     //Google
     //#################
-     passport.use(new GoogleStrategy({
-     
-             clientID: '409698655576-ov114v5qsto2kgogobrfsr63usoit96r.apps.googleusercontent.com',
-             clientSecret: 'Hz54DyqPUVdYERls1rThv-qa',
-             callbackURL: 'http://bunker-c9-nathanbland.c9.io/login/google/callback',
-     
-         },
-         function(token, refreshToken, profile, done) {
-     
-             // make the code asynchronous
-             // User.findOne won't fire until we have all our data back from Google
-             process.nextTick(function() {
-     
-                 // try to find the user based on their google id
-                 User.findOne({
-                     'google.id': profile.id
-                 }, function(err, user) {
-                     if (err)
-                         return done(err);
-     
-                     if (user) {
-     
-                         // if a user is found, log them in
-                         return done(null, user);
-                     }
-                     else {
-                         // if the user isnt in our database, create a new user
-                         var newUser = new User();
-     
-                         // set all of the relevant information
-                         newUser.google.id = profile.id;
-                         newUser.google.token = token;
-                         newUser.google.name = profile.displayName;
-                         newUser.google.email = profile.emails[0].value; // pull the first email
-     
-                         // save the user
-                         newUser.save(function(err) {
-                             if (err){
+    passport.use(new GoogleStrategy({
+
+            clientID: '409698655576-ov114v5qsto2kgogobrfsr63usoit96r.apps.googleusercontent.com',
+            clientSecret: 'Hz54DyqPUVdYERls1rThv-qa',
+            callbackURL: 'http://bunker-c9-nathanbland.c9.io/login/google/callback',
+
+        },
+        function(token, refreshToken, profile, done) {
+
+            process.nextTick(function() {
+                User.findOne({
+                    'google.id': profile.id
+                }, function(err, user) {
+                    if (err)
+                        return done(err);
+
+                    if (user) {
+                        return done(null, user);
+                    }
+                    else {
+
+                        var newUser = new User();
+                        newUser.google.id = profile.id;
+                        newUser.google.token = token;
+                        newUser.google.name = profile.displayName;
+                        newUser.google.email = profile.emails[0].value; // pull the first email
+
+                        newUser.save(function(err) {
+                            if (err) {
                                 console.log(err);
-                                throw(err);
-                             }
-                              
-                             return done(null, newUser);
-                         });
-                     }
-                 });
-             });
-     
-         }));
+                                throw (err);
+                            }
+
+                            return done(null, newUser);
+                        });
+                    }
+                });
+            });
+
+        }));
     //#################
     //End Google
     //#################
-    
-    
+
+
     //#################
     //twitter
     //#################
@@ -137,23 +114,17 @@ exports.setup = function(app) {
             User.findOne({
                 'twitter.id': profile.id
             }, function(err, user) {
-                // if there is an error, stop everything and return that
-                // ie an error connecting to the database
                 if (err)
                     return done(err);
-                // if the user is found then log them in
                 if (user) {
-                    return done(null, user); // user found, return that user
+                    return done(null, user);
                 }
                 else {
-                    // if there is no user, create them
                     var newUser = new User();
-                    // set all of the user data that we need
                     newUser.twitter.id = profile.id;
                     newUser.twitter.token = token;
                     newUser.twitter.username = profile.username;
                     newUser.twitter.displayName = profile.displayName;
-                    // save our user into the database
                     newUser.save(function(err) {
                         if (err)
                             throw err;
@@ -167,11 +138,9 @@ exports.setup = function(app) {
     //endtwitter
     //#################
     passport.use(new LocalStrategy(User.authenticate()));
-    // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
-    // used to deserialize the user
     passport.deserializeUser(function(id, done) {
         User.findById(id, function(err, user) {
             done(err, user);
@@ -236,11 +205,13 @@ exports.setup = function(app) {
     //#################
     //endtwitter
     //#################
-    
+
     //#################
     //Google
     //#################
-    router.get('/login/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+    router.get('/login/google', passport.authenticate('google', {
+        scope: ['profile', 'email']
+    }));
 
     // the callback after google has authenticated the user
     router.get('/login/google/callback',
@@ -251,24 +222,26 @@ exports.setup = function(app) {
     //#################
     //End Google
     //#################
-    
+
     //#################
     //facebook
     //#################
     // route for facebook authentication and login
-    router.get('/login/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    router.get('/login/facebook', passport.authenticate('facebook', {
+        scope: 'email'
+    }));
 
     // handle the callback after facebook has authenticated the user
     router.get('/login/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect : '/contacts',
-            failureRedirect : '/login'
+            successRedirect: '/contacts',
+            failureRedirect: '/login'
         }));
     //#################
     //End facebook
     //#################
-    
-    
+
+
     router.get('/login', function(req, res) {
         res.render('login', {
             title: "Bunker - Log in",

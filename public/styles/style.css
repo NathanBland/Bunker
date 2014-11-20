@@ -193,7 +193,10 @@ nav .fa {
 .phone p:first-child {
     display: block;
 }
-.landing .message {
+.landing .e500 {
+    font-size: 200%;
+}
+.landing .e404 {
     font-size: 200%;
 }
 .noContacts {
@@ -330,4 +333,18 @@ nav .fa {
 }
 .landing section {
     text-align: left;
+}
+.error {
+    color: red;
+}
+.center-button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.avatarForm{
+    
+}
+.avatarForm * {
+    display:inline-block;
 }

@@ -1,9 +1,7 @@
- {{> notifications}}
-
-
 <form class="pure-form pure-form-aligned" action=""  method="POST">
     <fieldset class="contact-form add" style="margin-left: auto;margin-right: auto;">
         <h1>Add A Contact</h1>
+         {{> notifications}}
         <input type="hidden" name="id" value="{{contact.id}}">
         <div class="pure-control-group">
             <label for="name">Name</label>
@@ -54,13 +52,12 @@
         {{else}}
         <div id="address-group">
             <div class="pure-control-group">
-                <label for="address">Address</label>
-                <input class="address" value="" name="address" type="text" placeholder="Address">
-                
+                <label for="desc">Address Type</label>
+                <input class="desc" value="" name="desc" type="text" placeholder="Description">
             </div>
             <div class="pure-control-group">
-                <label for="desc">Description</label>
-                <input class="desc" value="" name="desc" type="text" placeholder="Description">
+                <label for="address">Address</label>
+                <input class="address" value="" name="address" type="text" placeholder="Address">
             </div>
             <div class="pure-control-group">
                 <label for="city">City, State, Zip</label>

@@ -1,6 +1,8 @@
 var express = require("express");
 var ensureLogin = require('connect-ensure-login');
 var ensureAuthenticated = ensureLogin.ensureAuthenticated;
+var path = require("path");
+var fs = require("fs-extra");
 
 exports.setup = function() {
     var router = express.Router();
@@ -15,9 +17,7 @@ exports.setup = function() {
     router.get('/contacts', function(req, res, next) {
         if (req.user) {
             req.user.getContacts()
-                .sort({
-                    id: 1
-                })
+                .sort('firstName')
                 .exec(function(err, contacts) {
                     res.render('contacts', {
                         title: "Bunker - All Contacts",
@@ -31,26 +31,32 @@ exports.setup = function() {
             title: "Bunker - About Bunker"
         });
     });
-    
+
     //search
-    router.get('/results?', function(req,res,next){
-        var re = new RegExp("^"+req.query.name, 'i');
+    router.get('/results?', function(req, res, next) {
+        var re = new RegExp("^" + req.query.name, 'i');
         req.user.getContacts()
-            .or([{ firstName: re }, { lastName: re }])
-            .sort({firstName: 1}).exec(function(err, contacts) {
+            .or([{
+                firstName: re
+            }, {
+                lastName: re
+            }])
+            .sort({
+                firstName: 1
+            }).exec(function(err, contacts) {
                 //res.json(JSON.stringify(users)); possible future ajax 
                 res.render('contacts', {
                     title: "Bunker - Search Results",
                     contacts: contacts
                 });
-            });    
+            });
     });
     router.get('/search', function(req, res, next) {
         res.render('search.html', {
             title: "Bunker - Search for Contacts"
         });
     });
-    
+
 
     //attempt to make additions
     router.get('/contact/add', function(req, res, next) {
@@ -63,7 +69,7 @@ exports.setup = function() {
     });
     router.get('/contact/:id/edit', function(req, res, next) {
         if (!req.user) {
-            return res.status(401).send("Not authorized.");
+            return res.redirect('/login');
         }
         req.user.getContactById(req.params.id, function(err, contact) {
             console.log(contact);
@@ -83,11 +89,64 @@ exports.setup = function() {
 
     router.post('/contact/add', saveNew);
     router.post('/contact/:id/edit', saveNew);
+    router.post('/contact/:id/upload', setAvatar);
     router.post('/contact/:id/delete', deleteContact);
+
+    function moveImage(id, tempPath, targetPath, type) {
+        targetPath += type;
+        console.log(type);
+        console.log(targetPath);
+        if (fs.exists(targetPath)) {
+            console.log("file already there");
+        }
+        var source = fs.createReadStream(tempPath);
+        var dest = fs.createWriteStream(targetPath);
+
+        source.pipe(dest);
+        source.on('end', function() {
+            console.log("Upload successful");
+            fs.remove(tempPath, function(err) {
+                if (err) {
+                    console.log(err);
+                }
+            })
+        });
+        source.on('error', function(err) {
+            if (err) console.log(err);
+        });
+    }
+
+    function setAvatar(req, res, next) {
+        if (!req.user) {
+            return res.redirect('/login');
+        }
+        if (!req.files) {
+            return res.redirect('/contact/' + req.params.id);
+        }
+        console.log(req.files.upload);
+        var tempPath = req.files.upload.path;
+        var targetPath = './avatars/' + req.params.id;
+        if (path.extname(req.files.upload.name).toLowerCase() === '.png') {
+            moveImage(req.params.id, tempPath, targetPath, '.png');
+        }
+        else if (path.extname(req.files.upload.name).toLowerCase() === '.jpg') {
+            moveImage(req.params.id, tempPath, targetPath, '.jpg');
+        }
+        else {
+            fs.unlink(tempPath, function(err) {
+                if (err) {
+                    console.log(err);
+                }
+                console.error("Only .png or .jpg files are allowed!");
+            });
+        }
+        return res.redirect('/contact/' + req.params.id);
+
+    }
 
     function saveNew(req, res, next) {
         if (!req.user) {
-            return res.status(401).send("Not authorized.");
+            return res.redirect('/login');
         }
         req.user.getContactById(req.params.id, function(err, contact) {
             //console.log(contact);
@@ -96,8 +155,16 @@ exports.setup = function() {
                 console.log("Not an existing Contact.");
             }
             console.log(req.body.name.length);
-            if (req.body.name == "" || req.body.name.length < 1){
-                res.redirect("/add");
+            if (req.body.name == "" || req.body.name.length < 1) {
+                return res.render('add', {
+                    title: "Edit Contact - " + contact.firstName + " " + contact.lastName,
+                    contact: contact,
+                    notification: {
+                        severity: "error",
+                        other: "landing",
+                        message: "Name is required"
+                    }
+                });
             }
             var name = req.body.name;
             var myName = name.split(" ");
@@ -140,9 +207,11 @@ exports.setup = function() {
             var cPhones = req.body.phoneNum;
             var phoneNumbers = [];
             if (cPhones instanceof Array) {
-                var pCount = req.body.phoneNum.length;
+                console.log("instance of array");
+                var pCount = cPhones.length;
+                console.log(pCount);
                 if (pCount > 0) {
-                    for (var i = 0; i < eCount; i++) {
+                    for (var i = 0; i < pCount; i++) {
                         phoneNumbers.push({
                             number: req.body.phoneNum[i],
                             pType: req.body.phoneType[i]
@@ -151,9 +220,10 @@ exports.setup = function() {
                 }
             }
             else if (cPhones.indexOf(',') > -1) {
+                console.log('indexof ,');
                 var pCount = req.body.phoneNum.length;
                 if (pCount > 0) {
-                    for (var i = 0; i < eCount; i++) {
+                    for (var i = 0; i < pCount; i++) {
                         phoneNumbers.push({
                             number: req.body.phoneNum[i],
                             pType: req.body.phoneType[i]
@@ -162,6 +232,7 @@ exports.setup = function() {
                 }
             }
             else {
+                console.log('else');
                 phoneNumbers = [{
                     number: req.body.phoneNum,
                     pType: req.body.phoneType
@@ -221,7 +292,7 @@ exports.setup = function() {
 
     function deleteContact(req, res, next) {
         if (!req.user) {
-            return res.status(401).send("Not authorized.");
+            return res.redirect('login');
         }
         req.user.getContactById(req.params.id, function(err, contact) {
             if (contact) {
@@ -246,7 +317,7 @@ exports.setup = function() {
 
     router.get('/contact/:id', function(req, res, next) {
         if (!req.user) {
-            return res.status(401).send("Not authorized.");
+            return res.redirect('/login');
         }
         req.user.getContactById(req.params.id, function(err, contact) {
             if (contact) {
@@ -275,7 +346,8 @@ exports.setup = function() {
             title: "404 Error - Page Not Found",
             notification: {
                 severity: "error",
-                message: "Hey I couldn't find that page, sorry."
+                message: "Hey I couldn't find that page, sorry.",
+                type: "e404"
             }
         });
     });
@@ -288,7 +360,8 @@ exports.setup = function() {
             title: "500 Error - Server Error",
             notification: {
                 severity: "error",
-                message: "Something is very wrong on our side. Try again later."
+                message: "Something is very wrong on our side. Try again later.",
+                type: "e500"
             }
         });
     });

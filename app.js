@@ -6,7 +6,7 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 var routes = require('./routes/');
-
+var multer  = require('multer');
 mongoose.connect('mongodb://' + (process.env.IP || 'localhost') + '/contacts');
 
 var app = express();
@@ -23,6 +23,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(multer({ dest: './tmp/'}))
 app.use(cookieParser('important things, kept safe.'));
 app.use(session({
     secret: 'The key to a secret is hidden in the chest.',
