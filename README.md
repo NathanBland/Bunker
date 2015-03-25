@@ -5,7 +5,7 @@ A contact list built to keep your contacts. You can **[Preview](https://bunker-c
 
 Project Description
 -------------------
-The project is a perosnal contact manager. It will allow you to store contacts, sort by first or last name, and search. 
+The project is a personal contact manager. It will allow you to store contacts, sort by first or last name, and search. 
 
 Each **contact** has the following properties:
 
